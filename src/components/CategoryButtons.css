@@ -1,0 +1,67 @@
+.category-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+    background: linear-gradient(120deg, #f8beb3 65%, #fdeae6 60%, #f7b2a9 50%); /* Fondo degradado */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+    max-width: 1200px;
+    margin: auto;
+}
+
+.category-buttons-question {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #6a251a; /* Tono más oscuro para contraste */
+    text-align: center;
+}
+
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Más espacio entre los botones */
+    justify-content: center;
+    width: 100%;
+}
+
+.category-buttons button {
+    background: linear-gradient(45deg, #6a251a, #6a251a); /* Degradado marrón/terracota */
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: background 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: calc(33.33% - 20px);
+    box-sizing: border-box;
+}
+
+.category-buttons button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+    .category-buttons {
+        gap: 10px;
+    }
+
+    .category-buttons button {
+        padding: 10px 20px;
+        font-size: 14px;
+        width: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 400px) {
+    .category-buttons button {
+        width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+    }
+}

@@ -1,0 +1,39 @@
+/* PromotionBanner.css */
+.promotion-banner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(180deg, #f8beb3 100%, #fcaa9f 0%); /* Fondo degradado */
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 1200px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+
+.promotion-banner {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.promotion-banner-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Ajustar la imagen, recortando si es necesario */
+  border-radius: 10px;
+  transition: opacity 0.5s ease-in-out; /* Transición suave entre imágenes */
+}
+
+/* Añadir media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .promotion-banner-container {
+      max-width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+      padding: 10px;
+  }
+
+  .promotion-banner-image {
+      object-fit: contain; /* Evitar recortes en pantallas pequeñas */
+  }
+}

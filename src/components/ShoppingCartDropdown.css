@@ -1,0 +1,135 @@
+/* Dropdown del Carrito */
+.cart-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: #fdeae6;
+    border: 1px solid #f8beb3;
+    border-radius: 8px;
+    padding: 15px;
+    width: 320px;
+    max-height: 400px; /* Limitar la altura en pantallas pequeñas */
+    overflow-y: auto; /* Añadir scroll si el contenido sobrepasa la altura */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1500;
+    color: #333;
+    animation: slide-down 0.3s ease-in-out; /* Animación de deslizamiento */
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Más separación entre los elementos */
+.cart-dropdown ul {
+    padding: 0;
+    list-style: none;
+}
+
+.cart-dropdown li {
+    border-bottom: 1px solid #ddd; /* Línea divisoria entre productos */
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+/* Total y ahorro en negrita y alineados */
+.savings-total, .total-to-pay {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 5px 0; /* Un poco de margen superior e inferior */
+}
+
+.total-to-pay {
+    font-size: 18px;
+    color: #6a251a; /* Color más oscuro para resaltar */
+    margin-top: 10px;
+}
+
+.savings-total {
+    font-size: 16px;
+    color: #28a745;
+}
+
+.delivery-option {
+    margin: 15px 0; /* Más espacio entre opciones de entrega */
+}
+
+/* Mejorar el diseño de los inputs de entrega */
+.delivery-option label {
+    margin-right: 10px;
+    font-size: 15px;
+    align-items: center;
+}
+
+.delivery-option input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Botón de WhatsApp con más padding y sombra */
+.whatsapp-btn {
+    background-color: #25D366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 12px 15px;
+    font-size: 16px;
+    width: 100%;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15); /* Añadir sombra */
+}
+
+.whatsapp-btn:hover {
+    background-color: #128C7E;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25); /* Sombra más intensa en hover */
+}
+
+/* Botón de eliminar */
+.remove-btn {
+    background-color: #ff6b6b; /* Rojo suave */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.remove-btn:hover {
+    background-color: #ff4d4d; /* Rojo más intenso */
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 600px) {
+    .cart-dropdown {
+        width: 180px; /* Reducir el ancho para pantallas pequeñas */
+        right: -100px; /* Centrar el dropdown */
+        padding: 10px;
+    }
+
+    .whatsapp-btn {
+        font-size: 14px; /* Reducir el tamaño del texto en móviles */
+        padding: 10px 12px;
+    }
+
+    .remove-btn {
+        font-size: 11px;
+        padding: 4px 6px;
+    }
+
+    .savings-total{
+        font-size: 14px; /* Reducir el tamaño del texto */
+    }
+    .total-to-pay {
+        font-size: 18px; /* Reducir el tamaño del texto */
+    }
+}

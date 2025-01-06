@@ -1,0 +1,155 @@
+/* Navbar General */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: linear-gradient(120deg, #f8beb3 70%, #fdeae6 60%, #f7b2a9 50%);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    height: 60px; /* Mantener altura fija */
+}
+
+/* Ajuste del Logo */
+.navbar-logo {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    height: 100%; /* El logo ocupará el 100% de la altura del navbar */
+}
+
+.navbar-logo img {
+    text-decoration: none;
+    max-height: 50px; /* Mantener tamaño fijo */
+    margin-right: 10px;
+    object-fit: contain;
+}
+
+.navbar-logo span {
+    text-decoration: none;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Links del Navbar */
+.navbar-links {
+    display: flex;
+    gap: 30px;
+    margin-right: 40px;
+    font-size: 22px;
+}
+
+.navbar-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-links a:hover {
+    color: #6a251a;
+    transition: color 0.3s ease;
+}
+
+/* Estilo del Carrito en el Navbar */
+.navbar-cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cart-icon {
+    width: 30px;
+}
+
+/* Contador del Carrito */
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- Media Queries para Dispositivos Móviles --- */
+@media (max-width: 768px) {
+    .navbar {
+        background: linear-gradient(120deg, #f8beb3 42%, #fdeae6 20%, #f7b2a9 40%);
+        padding: 8px 15px;
+        height: 55px; /* Reducir altura en móviles */
+    }
+
+    .navbar-logo img {
+        max-height: 40px; /* Reducir tamaño del logo */
+    }
+
+    .navbar-logo span {
+        font-size: 20px; /* Reducir tamaño de fuente del texto del logo */
+    }
+
+    .navbar-links {
+        gap: 20px;
+        font-size: 18px; /* Reducir tamaño de fuente de los links */
+        margin-right: 20px;
+    }
+
+    .cart-icon {
+        width: 25px; /* Reducir tamaño del ícono del carrito */
+    }
+
+    .cart-count {
+        top: -8px;
+        right: -8px;
+        font-size: 10px; /* Reducir el tamaño del contador en móviles */
+        width: 18px;
+        height: 18px;
+        padding: 3px;
+    }
+}
+
+/* Media Query para pantallas muy pequeñas (teléfonos) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 5px 10px;
+        height: 50px;
+    }
+
+    .navbar-logo img {
+        max-height: 35px; /* Ajustar tamaño del logo */
+    }
+
+    .navbar-logo span {
+        font-size: 18px; /* Reducir más el tamaño de fuente del logo */
+    }
+
+    .navbar-links {
+        gap: 10px;
+        font-size: 16px; /* Reducir aún más el tamaño de fuente de los links */
+    }
+
+    .cart-icon {
+        width: 20px; /* Reducir el tamaño del ícono del carrito en teléfonos */
+    }
+
+    .cart-count {
+        top: -6px;
+        right: -6px;
+        font-size: 9px;
+        width: 15px;
+        height: 15px;
+        padding: 2px;
+    }
+}

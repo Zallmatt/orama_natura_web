@@ -1,0 +1,125 @@
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    max-width: 300px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.product-card.editing {
+    background-color: #f0f8ff;
+}
+
+.product-card:hover {
+    transform: scale(1.05); /* Efecto de aumento al hacer hover */
+}
+
+.product-image {
+    width: 100%;
+    height: auto; /* Fijar el tamaño de las imágenes */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-name,
+.product-description,
+.product-price,
+.product-discount {
+    margin: 8px 0;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #a00;
+}
+
+.discounted-price {
+    font-size: 18px;
+    color: #080;
+    font-weight: bold;
+}
+
+.product-actions {
+    margin-top: 12px;
+}
+
+.product-actions button {
+    margin: 4px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.product-actions button:hover {
+    background-color: #ddd;
+}
+
+.product-actions .edit-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.product-actions .delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.product-edit-form input {
+    margin: 8px 0;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.checkbox-container input {
+    margin-right: 8px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los botones */
+    margin-top: 16px; /* Separación superior */
+}
+
+.save-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1; /* Ajustar el ancho */
+    margin-right: 10px; /* Espaciado entre los botones */
+}
+
+.cancel-button {
+    background-color: #f44336;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    flex: 1; /* Ajustar el ancho */
+}

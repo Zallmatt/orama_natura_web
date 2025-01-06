@@ -1,0 +1,28 @@
+/* src/pages/ProductList.css */
+.product-list {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 70px;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Media query para pantallas pequeñas */
+@media (max-width: 600px) {
+    .product-grid {
+        gap: 10px;
+    }
+
+    .product-card {
+        width: 100%; /* Asegurarse de que las tarjetas de productos ocupen todo el ancho en pantallas pequeñas */
+        max-width: none; /* Eliminar cualquier límite de ancho máximo */
+    }
+}

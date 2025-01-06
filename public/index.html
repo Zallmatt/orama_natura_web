@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- public/index.html -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/logo_Orama.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="Orama Natura"
+      content="Catálogo de stock disponible Natura - Orama Natura"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo_Orama.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>Orama Natura</title>
+  </head>
+  <body>
+    <noscript>Orama Natura</noscript>
+    <div id="root"></div>
+    
+    <!-- Agregar script de Metricool justo antes del cierre de la etiqueta body -->
+    <script>
+      function loadScript(a) {
+        var b = document.getElementsByTagName("head")[0],
+          c = document.createElement("script");
+        c.type = "text/javascript";
+        c.src = "https://tracker.metricool.com/resources/be.js";
+        c.onreadystatechange = a;
+        c.onload = a;
+        b.appendChild(c);
+      }
+      loadScript(function () {
+        beTracker.t({ hash: "4b0c23a7e4530ae1357437ab283dc835" });
+      });
+    </script>
+
+  </body>
+</html>
