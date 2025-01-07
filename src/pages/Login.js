@@ -11,6 +11,7 @@ const Login = () => {
     const [isLoading, setIsLoading] = useState(false); // Controla si el proceso de login está en curso
     const navigate = useNavigate();
     const { login } = useAuth(); // Obtiene la función login desde el contexto
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -35,6 +36,9 @@ const Login = () => {
             setIsLoading(false);
         }
     };
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     return (
         <div className="login-container">
@@ -55,16 +59,16 @@ const Login = () => {
                     </div>
                     <div className="input-container"> {/* Aplica la clase input-container */}
                         <label htmlFor="password"></label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            aria-label="Contraseña"
-                            placeholder="Contraseña"
-                        />
-                        <i className="icon eye-icon"></i> {/* Icono de ojo */}
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                                aria-label="Contraseña"
+                                placeholder="Contraseña"
+                            />
+                            <i onClick={togglePasswordVisibility} className={`icon eye-icon ${showPassword ? 'show' : 'hide'}`}></i>
                     </div>
                     {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mensaje de error */}
                     <button type="submit" className="login-btn" disabled={isLoading}> {/* Botón de submit */}

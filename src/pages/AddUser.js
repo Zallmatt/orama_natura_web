@@ -5,7 +5,6 @@ const AddUser = () => {
     const [userData, setUserData] = useState({
         username: '',
         password: '',
-        isAdmin: false
     });
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
@@ -28,7 +27,7 @@ const AddUser = () => {
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/register`, userData);
             setMessage('Usuario agregado exitosamente');
-            setUserData({ username: '', password: '', isAdmin: false }); // Resetear formulario
+            setUserData({ username: '', password: ''}); // Resetear formulario
         } catch (error) {
             setMessage('Error al agregar el usuario: ' + error.response?.data.message);
         }
@@ -59,17 +58,6 @@ const AddUser = () => {
                         onChange={handleChange}
                         required
                     />
-                </div>
-                <div>
-                    <label>
-                        <input
-                            type="checkbox"
-                            name="isAdmin"
-                            checked={userData.isAdmin}
-                            onChange={handleChange}
-                        />
-                        Es administrador
-                    </label>
                 </div>
                 <button type="submit" disabled={isLoading}>
                     {isLoading ? 'Agregando...' : 'Agregar Usuario'}
