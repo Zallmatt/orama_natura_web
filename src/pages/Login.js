@@ -17,25 +17,31 @@ const Login = () => {
         e.preventDefault();
         setIsLoading(true);
         setErrorMessage('');
-    
+      
         try {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, {
                 username,
                 password
             });
     
-            if (response.data.success) {
+            if (response.status === 200 && response.data.success) {
                 login(response.data.token); // Guarda el token en el contexto/auth store
                 navigate('/admin');
             } else {
                 setErrorMessage(response.data.message || 'Error de autenticación');
             }
         } catch (error) {
-            setErrorMessage('Error de conexión con el servidor');
+            if (error.response && error.response.data && error.response.data.message) {
+                // Mensaje de error específico del servidor
+                setErrorMessage(error.response.data.message);
+            } else {
+                setErrorMessage('Error de conexión con el servidor');
+            }
         } finally {
             setIsLoading(false);
         }
     };
+    
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };

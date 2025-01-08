@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ProductList from './pages/ProductList';
 import AdminPanel from './pages/AdminPanel';
-import AddUser from './pages/AddUser';
 import Login from './pages/Login';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
@@ -74,7 +73,6 @@ function App() {
                         <Route path="/" element={<ProductList addToCart={addToCart} />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/admin" element={<PrivateRoute><AdminPanel /></PrivateRoute>} />
-                        <Route path="/add-user" element={<AddUser />} />
                     </Routes>
                 </Router>
             </div>
