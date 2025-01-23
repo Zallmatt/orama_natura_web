@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './Login.css';
-import axios from 'axios'; // Asegúrate de instalar axios con `npm install axios`
+import axios from 'axios'; // Asegúrate de instalar axios con `npm install axios` d
 
 const Login = () => {
     const [username, setUsername] = useState(''); // Maneja el estado de usuario
