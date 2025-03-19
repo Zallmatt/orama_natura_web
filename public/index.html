@@ -22,15 +22,16 @@
     <!-- Agregar script de Metricool justo antes del cierre de la etiqueta body -->
     <script>
       function loadScript(a) {
-        var b = document.getElementsByTagName("head")[0],
-          c = document.createElement("script");
+        var b = document.getElementsByTagName("head")[0];
+        var c = document.createElement("script");
         c.type = "text/javascript";
         c.src = "https://tracker.metricool.com/resources/be.js";
         c.onreadystatechange = a;
         c.onload = a;
         b.appendChild(c);
       }
-      loadScript(function () {
+      
+      loadScript(function() {
         beTracker.t({ hash: "4b0c23a7e4530ae1357437ab283dc835" });
       });
     </script>
