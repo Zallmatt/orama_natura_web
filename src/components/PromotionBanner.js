@@ -6,7 +6,6 @@ import promotionBanner3 from '../assets/images/promotionBanner3.png';
 
 const banners = [
   { img: promotionBanner1, alt: 'Promotion 1' },
-  { img: promotionBanner2, alt: 'Promotion 2' },
   { img: promotionBanner3, alt: 'Promotion 3' },
 ];
 
