@@ -1,4 +1,4 @@
-// src/components/CategoryButtons.js
+// src/components/CategoryButtons.jsx
 import React from 'react';
 import './CategoryButtons.css';
 
