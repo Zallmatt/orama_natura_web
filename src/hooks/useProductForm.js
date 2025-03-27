@@ -47,9 +47,15 @@ const useProductForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {              
+        try {
             const res = await axios.post(`${process.env.REACT_APP_API_URL}/products`, product);
-            setProducts([...products, res.data]);
+            setProducts([
+                ...products,
+                {
+                    ...res.data,
+                    createdAt: new Date().toISOString() // asegurar que tenga createdAt
+                }
+            ]);
             alert('Producto añadido correctamente');
             resetForm();
         } catch (err) {
