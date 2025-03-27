@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './PromotionBanner.css';
 import promotionBanner1 from '../assets/images/promotionBanner1.png';
-import promotionBanner2 from '../assets/images/promotionBanner2.png';
+import promotionBanner2 from '../assets/images/banner_productos.png';
 import promotionBanner3 from '../assets/images/promotionBanner3.png';
 
 const banners = [
   { img: promotionBanner1, alt: 'Promotion 1' },
+  { img: promotionBanner2, alt: 'Promotion 1' },
   { img: promotionBanner3, alt: 'Promotion 3' },
 ];
 

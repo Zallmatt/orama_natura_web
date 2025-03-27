@@ -1,22 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import ShoppingCartDropdown from './ShoppingCartDropdown'; // Importamos el nuevo componente
+import ShoppingCartDropdown from './ShoppingCartDropdown';
 import './Navbar.css';
 
 const Navbar = ({ cartItems, removeFromCart, sendToWhatsApp, deliveryOption, handleDeliveryOptionChange }) => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
-    const dropdownRef = useRef(null); // Creamos una referencia para el dropdown
-    const cartIconRef = useRef(null); // Creamos una referencia para el ícono del carrito
+    const dropdownRef = useRef(null);
+    const cartIconRef = useRef(null);
 
-    // Función para alternar la visibilidad del dropdown del carrito
     const toggleDropdown = (event) => {
-        event.stopPropagation(); // Evitar que el evento de clic se propague
-        setDropdownVisible(!dropdownVisible); // Alternar la visibilidad
+        event.stopPropagation();
+        setDropdownVisible(!dropdownVisible);
     };
 
-    // Función para cerrar el dropdown si se hace clic fuera de él o en el icono del carrito
     const handleClickOutside = (event) => {
-        // Si el clic es fuera del dropdown y no es en el ícono del carrito, cerrar el dropdown
         if (
             dropdownRef.current &&
             !dropdownRef.current.contains(event.target) &&
@@ -26,7 +23,6 @@ const Navbar = ({ cartItems, removeFromCart, sendToWhatsApp, deliveryOption, han
         }
     };
 
-    // Añadimos un event listener para detectar clics fuera del carrito
     useEffect(() => {
         document.addEventListener('mousedown', handleClickOutside);
         return () => {
@@ -36,35 +32,39 @@ const Navbar = ({ cartItems, removeFromCart, sendToWhatsApp, deliveryOption, han
 
     return (
         <nav className="navbar">
-            <Link to="/" className="navbar-logo"> {/* Agregamos el Link aquí */}
-                <img src="/logo_Orama.png" alt="Logo" />
-                <span>ORAMA NATURA</span>
-            </Link>
-            <div className="navbar-links">
-                {/* Icono del carrito */}
-                <div
-                    className="navbar-cart"
-                    ref={cartIconRef}
-                    onClick={toggleDropdown} // Clic para abrir/cerrar el dropdown
-                >
-                    <img src="/cart-icon.png" alt="Carrito" className="cart-icon" />
-                    {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>}
+            <div className="navbar-left">
+                <Link to="/productos">PRODUCTOS</Link>
+                <Link to="/promociones">PROMOCIONES</Link>
+            </div>
 
-                    {/* Dropdown del carrito */}
+            <div className="navbar-center">
+                <Link to="/" className="navbar-logo">
+                    <img src="/logo_Orama.png" alt="Logo" />
+                    <span>ORAMA</span>
+                </Link>
+            </div>
+
+            <div className="navbar-right">
+                <Link to="/lanzamientos">LANZAMIENTOS</Link>
+                <Link to="/contacto">CONTACTOS</Link>
+                
+                <div className="navbar-cart" ref={cartIconRef} onClick={toggleDropdown}>
+                    <img src="/cart-icon.png" alt="Carrito" className="cart-icon" />
+                    {cartItems.length > 0 && (
+                        <span className="cart-count">{cartItems.length}</span>
+                    )}
                     {dropdownVisible && (
-                        <div ref={dropdownRef} onClick={(e) => e.stopPropagation()}> {/* Prevenir propagación del clic */}
-                            <ShoppingCartDropdown 
-                                cartItems={cartItems} 
-                                removeFromCart={removeFromCart} 
-                                sendToWhatsApp={sendToWhatsApp} 
+                        <div ref={dropdownRef} onClick={(e) => e.stopPropagation()}>
+                            <ShoppingCartDropdown
+                                cartItems={cartItems}
+                                removeFromCart={removeFromCart}
+                                sendToWhatsApp={sendToWhatsApp}
                                 deliveryOption={deliveryOption}
                                 handleDeliveryOptionChange={handleDeliveryOptionChange}
                             />
                         </div>
                     )}
                 </div>
-                <Link to="/">Catálogo</Link>
-                <Link to="/login">Administrador</Link>
             </div>
         </nav>
     );

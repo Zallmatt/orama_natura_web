@@ -1,10 +1,8 @@
 /* src/pages/ProductList.css */
 .product-list {
-    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 70px;
 }
 
 .product-grid {
