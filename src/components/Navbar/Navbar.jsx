@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import ShoppingCartDropdown from './ShoppingCartDropdown';
+import ShoppingCartDropdown from '../ShoppingCart/ShoppingCartDropdown';
 import './Navbar.css';
 
 const Navbar = ({ cartItems, removeFromCart, sendToWhatsApp, deliveryOption, handleDeliveryOptionChange }) => {

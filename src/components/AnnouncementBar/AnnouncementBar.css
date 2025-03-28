@@ -1,0 +1,14 @@
+.announcement-bar {
+    background-color: #e89fa2;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 0;
+    position: fixed;
+    top: 70px;
+    width: 100%;
+    z-index: 1100;
+    font-family: 'Poppins', sans-serif;
+  }
+  

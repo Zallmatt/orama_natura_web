@@ -6,3 +6,6 @@ body {
     box-sizing: border-box;
     background-color: #f7f7f7bd; /* Aplica el color de fondo */
 }
+.main-content {
+    padding-top: 70px; /* o 55px en mobile si cambia el navbar */
+  }

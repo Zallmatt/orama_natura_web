@@ -1,8 +1,7 @@
-
 import React, { useState } from 'react';
 import './AdminPanel.css';
-import ProductCard from '../components/ProductCard';
-import useProductForm from '../hooks/useProductForm';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import useProductForm from '../../hooks/useProductForm';
 
 const AdminPanel = () => {
     const {
