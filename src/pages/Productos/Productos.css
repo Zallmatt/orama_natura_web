@@ -1,64 +1,69 @@
-/* Contenedor general */
-.product-list {
-    padding: 60px 40px;
-    max-width: 1200px;
-    margin: 0 auto;
+.productos-page {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 50px 20px 60px;
+  background: linear-gradient(to bottom, #fffdfd, #fceeee);
+  min-height: 100vh;
+}
+
+.productos-title {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  color: #5c2b1c;
+  margin-bottom: 10px;
+}
+
+.productos-subtitle {
+  text-align: center;
+  font-size: 15px;
+  color: #7d4a3c;
+  margin-bottom: 35px;
+}
+
+.productos-filtro {
+  background-color: #fce7e4;
+  padding: 30px 20px;
+  border-radius: 16px;
+  margin-bottom: 40px;
+  text-align: center;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+}
+
+.productos-filtro h4 {
+  font-size: 22px;
+  color: #6a251a;
+  margin-bottom: 18px;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 50px;
+}
+
+.productos-loading,
+.productos-error {
+  text-align: center;
+  font-size: 18px;
+  padding: 40px;
+  color: #aa3a3a;
+}
+
+@media (max-width: 768px) {
+  .productos-title {
+    font-size: 24px;
   }
-  
-  /* Botones de categoría */
-  .category-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 40px;
+
+  .productos-subtitle {
+    font-size: 14px;
   }
-  
-  .category-buttons button {
-    background-color: #f8beb3;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: background 0.3s ease;
+
+  .productos-filtro {
+    padding: 20px 15px;
   }
-  
-  .category-buttons button:hover {
-    background-color: #e89a8c;
+
+  .productos-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   }
-  
-  /* Grid de productos */
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 30px;
-  }
-  
-  /* Estilo para cada tarjeta (si necesitás override visual) */
-  .product-card {
-    background-color: #fff0ee;
-    border-radius: 10px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .product-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-  }
-  
-  /* Responsive para pantallas más chicas */
-  @media (max-width: 768px) {
-    .product-list {
-      padding: 40px 20px;
-    }
-  
-    .product-grid {
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    }
-  }
-  
+}
