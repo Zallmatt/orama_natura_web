@@ -1,69 +1,43 @@
-.productos-page {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 50px 20px 60px;
-  background: linear-gradient(to bottom, #fffdfd, #fceeee);
+.productos-wrapper {
+  padding: 2rem;
+  background: linear-gradient(to bottom, #f9f9f9, #e6ecf3);
   min-height: 100vh;
 }
 
-.productos-title {
-  font-size: 30px;
-  font-weight: bold;
+.productos-hero {
   text-align: center;
-  color: #5c2b1c;
-  margin-bottom: 10px;
+  margin-bottom: 2rem;
 }
 
-.productos-subtitle {
-  text-align: center;
-  font-size: 15px;
-  color: #7d4a3c;
-  margin-bottom: 35px;
+.productos-hero h1 {
+  font-size: 2.5rem;
+  color: #2e4386;
 }
 
-.productos-filtro {
-  background-color: #fce7e4;
-  padding: 30px 20px;
-  border-radius: 16px;
-  margin-bottom: 40px;
-  text-align: center;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+.productos-hero p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
 }
 
-.productos-filtro h4 {
-  font-size: 22px;
-  color: #6a251a;
-  margin-bottom: 18px;
+.productos-filtros {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
 }
 
 .productos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
 }
 
 .productos-loading,
 .productos-error {
   text-align: center;
-  font-size: 18px;
-  padding: 40px;
-  color: #aa3a3a;
-}
-
-@media (max-width: 768px) {
-  .productos-title {
-    font-size: 24px;
-  }
-
-  .productos-subtitle {
-    font-size: 14px;
-  }
-
-  .productos-filtro {
-    padding: 20px 15px;
-  }
-
-  .productos-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  }
+  padding: 4rem;
+  font-size: 1.5rem;
+  color: #3f76b6;
 }

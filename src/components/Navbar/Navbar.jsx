@@ -50,7 +50,7 @@ const Navbar = ({ cartItems, removeFromCart, sendToWhatsApp, deliveryOption, han
                 
                 <div className="navbar-cart" ref={cartIconRef} onClick={toggleDropdown}>
                     <img src="/cart-icon.png" alt="Carrito" className="cart-icon" />
-                    {cartItems.length > 0 && (
+                    {cartItems > 0 && (
                         <span className="cart-count">{cartItems.length}</span>
                     )}
                     {dropdownVisible && (

@@ -1,29 +1,27 @@
-import React, { useState } from 'react';
-import './CategoryButtons.css';
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './CategoryButtons.module.css';
 
-const CategoryButtons = ({ categories, onCategoryClick }) => {
-  const [activeCategory, setActiveCategory] = useState('Todos');
-
-  const handleClick = (category) => {
-    setActiveCategory(category);
-    onCategoryClick(category);
-  };
-
+const CategoryButtons = ({ categories, onCategoryClick, selectedCategory }) => {
   return (
-    <div className="category-buttons-container">
-      <div className="category-buttons">
-        {categories.map((category) => (
-          <button
-            key={category}
-            className={activeCategory === category ? 'active' : ''}
-            onClick={() => handleClick(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+    <div className={styles.container}>
+      {categories.map((category) => (
+        <button
+          key={category}
+          className={`${styles.button} ${selectedCategory === category ? styles.active : ''}`}
+          onClick={() => onCategoryClick(category)}
+        >
+          {category}
+        </button>
+      ))}
     </div>
   );
+};
+
+CategoryButtons.propTypes = {
+  categories: PropTypes.array.isRequired,
+  onCategoryClick: PropTypes.func.isRequired,
+  selectedCategory: PropTypes.string.isRequired
 };
 
 export default CategoryButtons;

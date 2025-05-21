@@ -1,73 +1,63 @@
-import React from 'react';
-import './ProductDisplayCard.css';
+import React, { useState } from 'react'; // <-- Esto es lo que faltaba
+import PropTypes from 'prop-types';
+import styles from './ProductDisplayCard.module.css';
+import { FaCartPlus, FaTag, FaTimes } from 'react-icons/fa';
 
 const ProductDisplayCard = ({ product, addToCart }) => {
-    const discountedPrice = product.price - (product.price * product.discount / 100);
+  const { name, price, discount, image, stock } = product;
+  const finalPrice = price - (price * discount / 100);
+  const [showImage, setShowImage] = useState(false);
 
-    const formatNumber = (number) => {
-        return parseFloat(number).toLocaleString('es-ES', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-            useGrouping: true
-        });
-    };
 
-    const hasFragranceNote = product.description.includes("CONSULTAR FRAGANCIAS DISPONIBLES");
+   return (
+    <>
+      <div className={styles.card}>
+        {discount > 0 && (
+          <div className={styles.badge}>
+            <FaTag className={styles.icon} /> -{discount.toFixed(0)}%
+          </div>
+        )}
 
-    return (
-        <div className="product-card">
-            {/* Badge de oferta */}
-            {product.discount >= 30 && (
-                <span className="product-badge">¡Oferta!</span>
-            )}
+        <img 
+          src={image} 
+          alt={name} 
+          className={styles.image} 
+          onClick={() => setShowImage(true)} 
+        />
 
-            {/* Imagen */}
-            <img
-                src={product.image}
-                alt={product.name}
-                className="product-image"
-                onError={(e) => e.target.src = "https://via.placeholder.com/300x400.png?text=Image+Not+Available"}
-            />
-
-            <h2 className="product-name">{product.name}</h2>
-
-            <p className="product-description">
-                {hasFragranceNote
-                    ? product.description.replace("CONSULTAR FRAGANCIAS DISPONIBLES", "").trim()
-                    : product.description}
-            </p>
-
-            {hasFragranceNote && (
-                <p className="fragrance-note">CONSULTAR FRAGANCIAS DISPONIBLES</p>
-            )}
-
-            <p className="product-price">
-                {product.discount > 0 ? (
-                    <>
-                        <span className="original-price">Precio: ${formatNumber(product.price)}</span><br />
-                        <span className="discounted-price">Precio con descuento: ${formatNumber(discountedPrice)}</span>
-                    </>
-                ) : (
-                    <span>Precio: ${formatNumber(product.price)}</span>
-                )}
-            </p>
-
-            {product.discount > 0 && (
-                <p className="product-discount">Descuento: {product.discount.toFixed(0)}%</p>
-            )}
-
-            {product.stock === 0 ? (
-                <p className="out-of-stock">Sin stock</p>
-            ) : (
-                <button
-                    className="add-to-cart-btn"
-                    onClick={() => addToCart(product)}
-                >
-                    Agregar al carrito
-                </button>
-            )}
+        <div className={styles.info}>
+          <h3 className={styles.title}>{name}</h3>
+          <div className={styles.prices}>
+            {discount > 0 && <span className={styles.oldPrice}>${price.toFixed(2)}</span>}
+            <span className={styles.newPrice}>${finalPrice.toFixed(2)}</span>
+          </div>
+          <button 
+            className={styles.button}
+            onClick={() => addToCart(product)}
+            disabled={stock <= 0}
+          >
+            <FaCartPlus /> {stock > 0 ? 'Agregar al carrito' : 'Sin stock'}
+          </button>
         </div>
-    );
+      </div>
+
+      {showImage && (
+        <div className={styles.modalOverlay} onClick={() => setShowImage(false)}>
+          <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+            <button className={styles.closeButton} onClick={() => setShowImage(false)}>
+              <FaTimes />
+            </button>
+            <img src={image} alt={name} className={styles.fullImage} />
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+ProductDisplayCard.propTypes = {
+  product: PropTypes.object.isRequired,
+  addToCart: PropTypes.func.isRequired
 };
 
 export default ProductDisplayCard;
