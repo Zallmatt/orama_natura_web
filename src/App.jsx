@@ -41,7 +41,7 @@ function App() {
         let message = '¡Hola! Quisiera hacer un pedido:\n\n';
         cartItems.forEach(item => {
             const discountedPrice = (item.price - (item.price * item.discount / 100)).toFixed(2); // Calcular el precio con descuento
-            message += `Producto: ${item.name} - Cantidad: ${item.quantity} - Precio con descuento: $${discountedPrice}\n`;
+            message += `Producto: ${item.name} - Descripción: ${item.description} - Cantidad: ${item.quantity} - Precio con descuento: $${discountedPrice}\n`;
         });
     
         // Calcular el total con los precios con descuento
