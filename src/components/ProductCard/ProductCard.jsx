@@ -18,9 +18,10 @@ const ProductCard = ({ product, onEdit, onDelete, isEditing, onCancelEdit, onSav
     };
 
     const getGoogleDriveImageLink = (url) => {
+        if (!url) return 'https://via.placeholder.com/300x400.png?text=No+Image';
         if (url.includes("drive.google.com")) {
-            const fileId = url.split('/d/')[1].split('/view')[0];
-            return `https://drive.google.com/uc?export=view&id=${fileId}`;
+            const match = url.match(/\/d\/(.+?)\//);
+            return match ? `https://drive.google.com/uc?export=view&id=${match[1]}` : url;
         }
         return url;
     };
@@ -29,11 +30,16 @@ const ProductCard = ({ product, onEdit, onDelete, isEditing, onCancelEdit, onSav
 
     return (
         <div className={`product-card ${isEditing ? 'editing' : ''}`}>
-            <img 
-                src={imageUrl} 
-                alt={editedProduct.name} 
-                className="product-image" 
-                onError={(e) => e.target.src = "https://via.placeholder.com/300x400.png?text=Image+Not+Available"} 
+            <img
+                src={imageUrl}
+                alt={editedProduct.name}
+                className="product-image"
+                onError={(e) => {
+                    if (!e.target.dataset.fallback) {
+                        e.target.src = "/images/fallback.png";
+                        e.target.dataset.fallback = true;
+                    }
+                }}
             />
             <h2 className="product-name">{editedProduct.name}</h2>
             <p className="product-description">{editedProduct.description}</p>
@@ -109,7 +115,7 @@ const ProductCard = ({ product, onEdit, onDelete, isEditing, onCancelEdit, onSav
                         placeholder="Num de stock"
                         required
                     />
-                     {/* Checkbox con label */}
+                    {/* Checkbox con label */}
                     <div className="checkbox-container">
                         <input
                             type="checkbox"

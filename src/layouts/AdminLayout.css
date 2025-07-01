@@ -1,0 +1,11 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-main {
+  margin-left: 240px; /* ancho del sidebar */
+  padding: 30px;
+  flex-grow: 1;
+  background-color: #fafafa;
+}
