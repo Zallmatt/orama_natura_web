@@ -1,0 +1,112 @@
+/* Contenedor general */
+.productos-page {
+  padding: 20px;
+}
+
+/* Título */
+.productos-page h1 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #3c2b1e;
+}
+
+/* Contenedor de botones de arriba */
+.productos-top-actions {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* Botones generales */
+.productos-page button {
+  background-color: #291d12;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+/* Hover general */
+.productos-page button:hover {
+  background-color: #8c643f;
+}
+
+/* Botón Crear Producto específico */
+.crear-producto {
+  background-color: #a97c50;
+}
+
+.crear-producto:hover {
+  background-color: #8c643f;
+}
+
+/* Tabla de productos */
+.productos-list {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.productos-list th,
+.productos-list td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.productos-list th {
+  background-color: #f5e4da;
+  color: #3c2b1e;
+}
+
+.productos-list tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.productos-list tr:hover {
+  background-color: #f1eae4;
+}
+
+/* Acciones */
+.productos-actions {
+  display: flex;
+  gap: 6px;
+
+}
+
+/* Botón Desactivar / Reactivar */
+.productos-actions .desactivar {
+  background-color: #e57373;
+}
+
+.productos-actions .desactivar:hover {
+  background-color: #d32f2f;
+}
+
+.productos-actions .reactivar {
+  background-color: #81c784;
+}
+
+.productos-actions .reactivar:hover {
+  background-color: #388e3c;
+}
+
+/* Stock bajo */
+.stock-bajo {
+  color: red;
+  font-weight: bold;
+}
+
+/* Filas inactivas */
+.producto-inactivo {
+  background-color: #f8f8f8;
+  opacity: 0.85;
+}
+
+/* Botones acción dentro de tabla */
+.productos-actions button {
+  padding: 6px 12px;
+  font-size: 14px;
+}

@@ -1,0 +1,23 @@
+.fragrance-form {
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 4px;
+  max-width: 400px;
+}
+
+.fragrance-form label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.fragrance-form input {
+  width: 100%;
+  padding: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.form-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}

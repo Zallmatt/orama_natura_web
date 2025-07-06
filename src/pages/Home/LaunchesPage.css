@@ -1,0 +1,91 @@
+.launches-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.launches-page h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+.launches-subtitle {
+  text-align: center;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+.hero-launch {
+  display: flex;
+  flex-wrap: wrap;
+  background: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.hero-image {
+  flex: 1 1 300px;
+  min-width: 200px;
+  max-width: 300px;  /* Agregá este límite */
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+}
+
+.hero-info {
+  flex: 1 1 300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-info h3 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+}
+
+.hero-category {
+  font-weight: bold;
+  color: #3f76b6;
+  margin-bottom: 8px;
+}
+
+.hero-description {
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.hero-price {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+
+.hero-old-price {
+  text-decoration: line-through;
+  color: #999;
+  margin-right: 8px;
+}
+
+.hero-btn {
+  background: #3f76b6;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: fit-content;
+  transition: background 0.3s;
+}
+
+.hero-btn:hover {
+  background: #2e4386;
+}
+
+.more-launches-title {
+  margin-bottom: 16px;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,31 @@
+.fragrance-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.fragrance-table th,
+.fragrance-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+}
+
+.fragrance-table th {
+  background: #eee;
+}
+
+.edit-btn {
+  background: #1976d2;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background: #d32f2f;
+  color: white;
+  border: none;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  margin-left: 0.3rem;
+}

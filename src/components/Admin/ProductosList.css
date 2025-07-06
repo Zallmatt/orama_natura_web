@@ -1,0 +1,83 @@
+.productos-list {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.productos-list th,
+.productos-list td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.productos-list th {
+  background-color: #f5e4da;
+  color: #3c2b1e;
+}
+
+.productos-list tbody tr:hover {
+  background-color: #f3ebe4;
+}
+
+.productos-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+/* Botones dentro de la tabla */
+.productos-actions button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+/* Editar */
+.productos-actions button.edit {
+  background-color: #a97c50;
+  color: white;
+}
+
+.productos-actions button.edit:hover {
+  background-color: #8c643f;
+}
+
+/* Desactivar */
+.productos-actions button.delete {
+  background-color: #e57373;
+  color: white;
+}
+
+.productos-actions button.delete:hover {
+  background-color: #d32f2f;
+}
+
+/* Reactivar */
+.productos-actions button.activate {
+  background-color: #81c784;
+  color: white;
+}
+
+.productos-actions button.activate:hover {
+  background-color: #388e3c;
+}
+
+/* Stock bajo */
+.stock-bajo {
+  color: red;
+  font-weight: bold;
+  background-color: #fff0f0;
+  border-radius: 4px;
+}
+
+
+/* Filas inactivas */
+.producto-inactivo {
+  background-color: #f8f8f8;
+  opacity: 0.85;
+}

@@ -1,28 +1,59 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import HomePage from '../pages/HomePage';
-import Login from '../pages/Login';
-import AdminPanel from '../pages/AdminPanel';
-import Productos from '../pages/Productos';
-import Promociones from '../pages/Promociones';
-import Contacto from '../pages/Contacto';
-import Lanzamientos from '../pages/Lanzamientos'
-import { useAuth } from '../context/AuthContext';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "../pages/Home/HomePage";
+import LoginPage from "../pages/Auth/LoginPage";
+import PrivateRouteAdmin from "./PrivateRouteAdmin";
+import AdminDashboard from "../pages/Admin/AdminDashboard";
+import ProductosPage from "../pages/Admin/ProductosPage";
+import CategoiasPage from "../pages/Admin/CategoriasPage";
+import PromocionesPage from "../pages/Admin/PromocionesPage";
+import OrdersPage from "../pages/Admin/OrdersPage";
+import FragrancesPage from "../pages/Admin/FragrancesPage";
+import MainLayout from "../layouts/MainLayout";
+import AdminLayout from "../layouts/AdminLayout";
 
-const PrivateRoute = ({ children }) => {
-  const { isAuthenticated } = useAuth();
-  return isAuthenticated ? children : <Navigate to="/login" />;
-};
+// Rutas públicas
+import ProductsPage from "../pages/Home/ProductsPage";
+import PromotionsPage from "../pages/Home/PromocionesPage";
+import LaunchesPage from "../pages/Home/LaunchesPage";
+import ContactPage from "../pages/Home/ContactPage";
+import ProductDetailPage from "../pages/Home/ProductDetailPage";  
+import CartPage from "../pages/Home/CartPage"; // Asegúrate de importar la página del carrito
 
-export const AppRoutes = ({ addToCart }) => (
+const AppRoutes = () => (
   <Routes>
-    <Route path="/home" element={<HomePage addToCart={addToCart} />} />
-    <Route path="/productos" element={<Productos />} />
-    <Route path="/promociones" element={<Promociones />} />
-    <Route path="/contacto" element={<Contacto />} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/lanzamientos" element={<Lanzamientos />} />
-    <Route path="/admin" element={<PrivateRoute><AdminPanel /></PrivateRoute>} />
-    <Route path="/" element={<Navigate to="/home" />} /> {/* Redirección */}
-    <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
+    <Route element={<MainLayout />}>
+      {/* Rutas públicas */}
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/productos" element={<ProductsPage />} />
+      <Route path="/producto/:id" element={<ProductDetailPage />} />
+      <Route path="/promociones" element={<PromotionsPage />} />
+      <Route path="/lanzamientos" element={<LaunchesPage />} />
+      <Route path="/contacto" element={<ContactPage />} />
+      <Route path="/carrito" element={<CartPage />} />
+
+      {/* Rutas admin dentro de MainLayout */}
+      <Route
+        path="/admin"
+        element={
+          <PrivateRouteAdmin>
+            <AdminLayout /> {/* Sidebar y outlet */}
+          </PrivateRouteAdmin>
+        }
+      >
+        <Route index element={<AdminDashboard />} />
+        <Route path="productos" element={<ProductosPage />} />
+        <Route path="categorias" element={<CategoiasPage />} />
+        <Route path="promociones" element={<PromocionesPage />} />
+        <Route path="ordenes" element={<OrdersPage />} />
+        <Route path="fragancias" element={<FragrancesPage />} />
+      </Route>
+
+      {/* 404 */}
+      <Route path="*" element={<h1>Página no encontrada</h1>} />
+    </Route>
   </Routes>
 );
+
+export default AppRoutes;

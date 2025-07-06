@@ -1,0 +1,142 @@
+/* Contenedor principal de la home */
+.home-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  background-color: #fffaf8;
+  font-family: 'Poppins', sans-serif;
+}
+
+
+/* Sección principal (mensaje + botón) */
+.home-message {
+  text-align: center;
+  background-color: #f8bfb3e7;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px 0px;
+}
+
+.home-message h2 {
+  font-size: 26px;
+  color: #42261a;
+  margin-bottom: 15px;
+}
+
+.home-buy-btn {
+  background-color: #a97c50;
+  color: white;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.home-buy-btn:hover {
+  background-color: #8c643f;
+  transform: scale(1.05);
+}
+
+/* Categorías destacadas */
+.home-categories {
+  text-align: center;
+  width: 100%;
+  padding: 40px 0px;
+}
+
+.home-categories h3 {
+  font-size: 24px;
+  color: #3c2b1e;
+  margin-bottom: 20px;
+}
+
+.category-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
+.category-buttons button {
+  background-color: #e9c0b4;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.category-buttons button:hover {
+  background-color: #d1a79b;
+}
+
+/* Secciones de productos recientes y promociones */
+.home-launches,
+.home-promotions {
+  width: 100%;
+  padding: 40px 0px;
+  text-align: center;
+  background-color: #fff6f4;
+}
+
+.home-launches h3,
+.home-promotions h3 {
+  font-size: 24px;
+  margin-bottom: 30px;
+  color: #3c2b1e;
+}
+
+.products-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .products-row {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .home-message h2 {
+    font-size: 22px;
+  }
+
+  .home-buy-btn {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+
+  .benefit-list {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .category-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .social-icons {
+    gap: 25px;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .home-social {
+    padding: 40px 10px;
+  }
+}

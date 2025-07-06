@@ -1,0 +1,81 @@
+.categorias-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.categoria-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.categoria-card:hover {
+  transform: translateY(-2px);
+}
+
+.color-preview {
+  height: 6px;
+  width: 100%;
+}
+
+.categoria-info {
+  padding: 12px 16px;
+  flex-grow: 1;
+}
+
+.categoria-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 17px;
+  font-weight: 600;
+  color: #333;
+}
+
+.categoria-info p {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.categoria-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 12px;
+  gap: 8px;
+  border-top: 1px solid #eee;
+  background: #fafafa;
+}
+
+.categoria-actions button {
+  padding: 5px 10px;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.categoria-actions button:first-child {
+  background: #c89b6f;
+  color: white;
+}
+
+.categoria-actions button:first-child:hover {
+  background: #a77c52;
+}
+
+.categoria-actions .delete-btn {
+  background: #e2e2e2;
+  color: #333;
+}
+
+.categoria-actions .delete-btn:hover {
+  background: #d83c3c;
+  color: white;
+}
