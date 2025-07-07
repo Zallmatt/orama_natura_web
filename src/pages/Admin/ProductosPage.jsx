@@ -60,11 +60,11 @@ const ProductosPage = () => {
       stock: parseInt(form.stock, 10),
       is_launch: Boolean(form.is_launch),
       category_id: form.category_id ? parseInt(form.category_id, 10) : null,
-      fragrance_id: form.fragrance_id ? parseInt(form.fragrance_id, 10) : null,
+      fragrance_id: form.fragrance_id ? String(form.fragrance_id) : null,
       promotion_id: form.promotion_id ? parseInt(form.promotion_id, 10) : null
     };
 
-    console.log("Payload corregido:", cleanForm);
+    console.log("Payload corregido:", cleanForm, JSON.stringify(cleanForm));
 
     try {
       if (editing) {

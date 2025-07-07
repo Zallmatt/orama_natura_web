@@ -52,7 +52,11 @@ const ProductosList = ({
               )}
             </td>
             <td>{prod.name}</td>
-            <td>{prod.fragrances?.name || "Sin fragancia"}</td>
+            <td>
+              {prod.fragrances
+                ? prod.fragrances.name
+                : "Sin fragancia"}
+            </td>
             <td>{prod.description}</td>
             <td>${prod.price}</td>
             <td>{prod.discount}%</td>

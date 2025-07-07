@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./ProductoForm.css";
 
-const ProductoForm = ({ initialData, onSave, onCancel, categories, fragrances, promotions }) => {
+const ProductoForm = ({ initialData, onSave, onCancel, categories, fragrances = [], promotions = [] }) => {
   const [form, setForm] = useState({
     name: "",
     description: "",
@@ -31,7 +31,7 @@ const ProductoForm = ({ initialData, onSave, onCancel, categories, fragrances, p
       });
     }
   }, [initialData]);
-
+  console.log("Fragrances:", fragrances);
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({
@@ -46,8 +46,13 @@ const ProductoForm = ({ initialData, onSave, onCancel, categories, fragrances, p
       alert("Por favor completa al menos nombre, precio y categoría.");
       return;
     }
-    onSave(form);
+    const payload = {
+      ...form,
+      fragrance_id: form.fragrance_id === "" ? null : parseInt(form.fragrance_id)
+    };
+    onSave(payload);
   };
+
 
   return (
     <>
@@ -147,21 +152,6 @@ const ProductoForm = ({ initialData, onSave, onCancel, categories, fragrances, p
               )}
             </label>
           </div>
-
-          {/* NUEVO SELECT DE FRAGANCIA */}
-          <label>
-            Fragancia:
-            <select
-              name="fragrance_id"
-              value={form.fragrance_id}
-              onChange={handleChange}
-            >
-              <option value="">Sin fragancia</option>
-              {fragrances.map((frag) => (
-                <option key={frag.id} value={frag.id}>{frag.name}</option>
-              ))}
-            </select>
-          </label>
         </fieldset>
 
         {/* VALORES Y LANZAMIENTO */}
