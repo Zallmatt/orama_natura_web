@@ -1,5 +1,10 @@
-import React from 'react';
-import './Testimonials.css';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "./Testimonials.css";
 
 const testimonials = [
   {
@@ -19,16 +24,38 @@ const testimonials = [
 const Testimonials = () => {
   return (
     <section className="testimonials-section">
-      <h3>Lo que dicen nuestras clientas <span>✨</span></h3>
-      <div className="testimonials-container">
+      <h3>
+        Lo que dicen nuestras clientas <span>✨</span>
+      </h3>
+      <Swiper
+        modules={[Navigation, Autoplay, Pagination]}
+        spaceBetween={30}
+        breakpoints={{
+          0: {
+            slidesPerView: 1
+          },
+          600: {
+            slidesPerView: 2
+          },
+          1024: {
+            slidesPerView: 3
+          }
+        }}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 4000 }}
+        loop={true}
+      >
         {testimonials.map((item, index) => (
-          <div className="testimonial-card" key={index}>
-            <div className="quote-icon">“</div>
-            <p className="testimonial-text">"{item.text}"</p>
-            <p className="testimonial-author">- {item.author}</p>
-          </div>
+          <SwiperSlide key={index}>
+            <div className="testimonial-card">
+              <div className="quote-icon">“</div>
+              <p className="testimonial-text">"{item.text}"</p>
+              <p className="testimonial-author">- {item.author}</p>
+            </div>
+          </SwiperSlide>
         ))}
-      </div>
+      </Swiper>
     </section>
   );
 };

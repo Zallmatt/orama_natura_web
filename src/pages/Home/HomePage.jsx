@@ -92,19 +92,30 @@ const HomePage = () => {
       {/* Beneficios */}
       <Benefits />
 
+      <div className="section-separator" />
+
       {/* Categorías */}
       <section className="home-categories">
         <h3>Explorá nuestras categorías</h3>
         <div className="category-buttons">
           {categorias
             .filter(Boolean)
-            .map((cat) => (
-              <button key={cat}>
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-              </button>
-            ))}
+            .map((cat) => {
+              let emoji = "🌿";
+              if (cat.toLowerCase().includes("crema")) emoji = "🧴";
+              if (cat.toLowerCase().includes("jabón")) emoji = "🧼";
+              if (cat.toLowerCase().includes("perfume")) emoji = "💧";
+
+              return (
+                <button key={cat}>
+                  {emoji} {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </button>
+              );
+            })}
         </div>
       </section>
+
+      <div className="section-separator" />
 
       {/* Testimonios */}
       <Testimonials />

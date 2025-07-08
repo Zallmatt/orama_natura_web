@@ -117,26 +117,72 @@
     padding: 10px 20px;
   }
 
-  .benefit-list {
-    flex-direction: column;
-    gap: 30px;
-  }
-
   .category-buttons {
     flex-direction: column;
     gap: 10px;
   }
 
-  .social-icons {
-    gap: 25px;
-  }
-
-  .social-icon {
-    width: 40px;
-    height: 40px;
-  }
-
   .home-social {
     padding: 40px 10px;
   }
+}
+
+/* Separadores entre secciones */
+.section-separator {
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e0c1b3, transparent);
+  margin: 40px auto;
+}
+
+/* Fade-in de productos */
+.products-row > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s forwards;
+}
+.products-row > *:nth-child(1) { animation-delay: 0s; }
+.products-row > *:nth-child(2) { animation-delay: 0.1s; }
+.products-row > *:nth-child(3) { animation-delay: 0.2s; }
+.products-row > *:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botón COMPRAR con pulse */
+.home-buy-btn {
+  background-color: #a97c50;
+  color: white;
+  padding: 16px 40px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 17px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(169, 124, 80, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(169, 124, 80, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(169, 124, 80, 0); }
+}
+
+/* Gradientes suaves en secciones */
+.home-launches {
+  background: linear-gradient(180deg, #fff6f4 0%, #fef0ea 100%);
+}
+.home-promotions {
+  background: linear-gradient(180deg, #fef0ea 0%, #fff6f4 100%);
+}
+
+/* Títulos con tipografía elegante */
+.home-launches h3,
+.home-promotions h3,
+.home-categories h3 {
+  font-family: 'Playfair Display', serif;
 }

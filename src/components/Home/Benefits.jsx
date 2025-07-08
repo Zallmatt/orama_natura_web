@@ -19,6 +19,14 @@ const Benefits = () => (
         <img src="/icons/customer-service.png" alt="Atención" />
         <p>Atención personalizada</p>
       </div>
+      <div className="benefit-item">
+        <img src="/icons/vegan.png" alt="Vegano" />
+        <p>Productos 100% veganos</p>
+      </div>
+      <div className="benefit-item">
+        <img src="/icons/cruelty-free.png" alt="No testeado en animales" />
+        <p>No testeados en animales</p>
+      </div>
     </div>
   </section>
 );
