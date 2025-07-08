@@ -9,17 +9,26 @@ const ProductsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("");
+  const [fragrances, setFragrances] = useState([]);
+  const [promotionsData, setPromotionsData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const resProducts = await api.get("/products");
-        setProducts(resProducts.data);
+        const [resProducts, resCategories, resFragrances, resPromotions] =
+          await Promise.all([
+            api.get("/products"),
+            api.get("/categories"),
+            api.get("/fragrances"),
+            api.get("/promotions"),
+          ]);
 
-        const resCategories = await api.get("/categories");
+        setProducts(resProducts.data);
         setCategorias(resCategories.data);
+        setFragrances(resFragrances.data);
+        setPromotionsData(resPromotions.data);
       } catch (error) {
-        console.error("Error cargando productos:", error);
+        console.error("Error cargando datos:", error);
       }
     };
 
@@ -109,7 +118,12 @@ const ProductsPage = () => {
       <div className="products-grid">
         {filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
-            <ProductCardHome key={product.id} product={product} />
+            <ProductCardHome
+              key={product.id}
+              product={product}
+              fragrances={fragrances}
+              promotions={promotionsData}
+            />
           ))
         ) : (
           <p style={{ textAlign: "center", color: "#888" }}>

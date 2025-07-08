@@ -1,103 +1,117 @@
 .product-card-home {
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background: #fff;
   border: 1px solid #eee;
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
-  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   max-width: 280px;
-  position: relative;
-  min-height: 420px;
+  width: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .product-card-home:hover {
   transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
+/* Imagen */
 .product-image {
   position: relative;
+  background: #f9f9f9;
 }
 
 .product-image img {
   width: 100%;
-  height: 200px;
+  height: 220px;
   object-fit: contain;
-  background: #f9f9f9;
 }
 
-.badge {
+/* Badges */
+.badge-launch {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  background: #3f76b6;
-  color: white;
+  top: 10px;
+  left: 10px;
+  background: #28a745;
+  color: #fff;
   font-size: 0.75rem;
-  padding: 2px 6px;
+  padding: 3px 7px;
   border-radius: 4px;
 }
 
-.badge-promo {
+.badge-discount {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   background: #d63384;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 3px 7px;
+  border-radius: 4px;
 }
 
-.badge-launch {
-  background: #28a745;
-}
-
+/* Info contenedor */
 .product-info {
-  padding: 12px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   flex: 1;
+  text-align: center;
 }
 
+/* Nombre */
 .product-name {
   font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0 0 4px;
+  font-weight: bold;
+  color: #3e1f0f;
+  margin-bottom: 4px;
 }
 
-.product-category,
-.product-fragance {
+/* Fragancia */
+.product-fragrance {
   font-size: 0.85rem;
   color: #555;
-  margin: 0 0 4px;
+  margin-bottom: 4px;
+  text-align: center;
 }
 
-.product-description {
-  font-size: 0.9rem;
-  color: #666;
-  margin: 0 0 8px;
-  flex-grow: 1;
+/* Promoción */
+.product-promotion {
+  font-size: 0.85rem;
+  color: #d63384; /* rosa fuerte para destacar promo */
+  font-weight: 500;
+  margin-bottom: 10px;
+  text-align: center;
 }
 
+/* Precios */
 .product-prices {
   display: flex;
+  justify-content: center;
   align-items: baseline;
   gap: 6px;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
 }
 
 .old-price {
   font-size: 0.9rem;
-  color: #888;
+  color: #aaa;
   text-decoration: line-through;
 }
 
 .final-price {
+  font-size: 1.3rem;
   font-weight: bold;
-  color: #2e4386;
-  font-size: 1rem;
+  color: #845f3a;
 }
 
+
+/* Stock */
 .product-stock {
   font-size: 0.85rem;
   color: #555;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .product-stock.low-stock {
@@ -105,31 +119,18 @@
   font-weight: bold;
 }
 
+/* Botón */
 .product-buy-btn {
-  background: #3f76b6;
-  color: white;
+  background: #a97c50;
+  color: #fff;
   border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
+  padding: 10px;
+  border-radius: 6px;
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   transition: background 0.3s;
 }
 
 .product-buy-btn:hover {
-  background: #2e4386;
-}
-
-.products-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .product-card-home {
-    max-width: 100%;
-  }
+  background: #845f3a;
 }

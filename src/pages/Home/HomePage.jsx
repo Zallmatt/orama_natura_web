@@ -15,8 +15,23 @@ const HomePage = () => {
   const [lanzamientos, setLanzamientos] = useState([]);
   const [promociones, setPromociones] = useState([]);
   const [categorias, setCategorias] = useState([]);
+  const [fragrances, setFragrances] = useState([]);
+  const [promotionsData, setPromotionsData] = useState([]);
 
   useEffect(() => {
+    const fetchFragrances = async () => {
+      const res = await api.get("/fragrances");
+      setFragrances(res.data);
+    };
+
+    const fetchPromotionsData = async () => {
+      const res = await api.get("/promotions");
+      setPromotionsData(res.data);
+    };
+
+    fetchFragrances();
+    fetchPromotionsData();
+
     const fetchLanzamientos = async () => {
       try {
         const res = await api.get("/products/launches");
@@ -74,7 +89,12 @@ const HomePage = () => {
         <h3>Nuevos ingresos</h3>
         <div className="products-row">
           {lanzamientos.map((product) => (
-            <ProductCardHome key={product.id} product={product} />
+            <ProductCardHome
+              key={product.id}
+              product={product}
+              fragrances={fragrances}
+              promotions={promotionsData}
+            />
           ))}
         </div>
       </section>
@@ -84,8 +104,12 @@ const HomePage = () => {
         <h3>Promociones destacadas</h3>
         <div className="products-row">
           {promociones.map((product) => (
-            <ProductCardHome key={product.id} product={product} />
-          ))}
+            <ProductCardHome
+              key={product.id}
+              product={product}
+              fragrances={fragrances}
+              promotions={promotionsData}
+            />))}
         </div>
       </section>
 
