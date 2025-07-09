@@ -26,7 +26,7 @@ const ProductCardHome = ({ product, fragrances, promotions }) => {
         <img src={image_url} alt={name} />
         {is_launch && <span className="badge badge-launch">NUEVO</span>}
         {discount > 0 && (
-          <span className="badge badge-discount">-{discount}%</span>
+          <span className="badge badge-discount">-{Math.round(discount)}%</span>
         )}
       </div>
       <div className="product-info">

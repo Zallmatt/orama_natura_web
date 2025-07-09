@@ -6,13 +6,20 @@ import "./PromotionsPage.css";
 const PromotionsPage = () => {
   const [promotions, setPromotions] = useState([]);
   const [products, setProducts] = useState([]);
+  const [fragrances, setFragrances] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // Cargar promociones
         const resPromos = await api.get("/promotions");
         setPromotions(resPromos.data);
 
+        // Cargar fragancias
+        const resFragrances = await api.get("/fragrances");
+        setFragrances(resFragrances.data);
+
+        // Cargar productos
         const resProducts = await api.get("/products");
         setProducts(resProducts.data);
       } catch (error) {
@@ -31,8 +38,9 @@ const PromotionsPage = () => {
       </p>
 
       {promotions.map((promo) => {
+        // Filtrar productos que pertenezcan a esta promo
         const promoProducts = products.filter(
-          (p) => p.promotions?.id === promo.id
+          (p) => p.promotion_id === promo.id
         );
 
         return (
@@ -50,11 +58,18 @@ const PromotionsPage = () => {
             {promoProducts.length > 0 ? (
               <div className="products-grid">
                 {promoProducts.map((product) => (
-                  <ProductCardHome key={product.id} product={product} />
+                  <ProductCardHome
+                    key={product.id}
+                    product={product}
+                    fragrances={fragrances}
+                    promotions={promotions}
+                  />
                 ))}
               </div>
             ) : (
-              <p className="no-products">No hay productos en esta promoción.</p>
+              <p className="no-products">
+                No hay productos en esta promoción.
+              </p>
             )}
           </div>
         );

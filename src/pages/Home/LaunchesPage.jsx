@@ -5,21 +5,31 @@ import "./LaunchesPage.css";
 
 const LaunchesPage = () => {
   const [products, setProducts] = useState([]);
+  const [fragrances, setFragrances] = useState([]);
+  const [promotions, setPromotions] = useState([]);
 
   useEffect(() => {
-    const fetchLaunches = async () => {
+    const fetchData = async () => {
       try {
-        const res = await api.get("/products");
-        const launches = res.data
+        const [resProducts, resFragrances, resPromotions] = await Promise.all([
+          api.get("/products"),
+          api.get("/fragrances"),
+          api.get("/promotions")
+        ]);
+
+        const launches = resProducts.data
           .filter((p) => p.is_launch)
-          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)); // más reciente primero
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
         setProducts(launches);
+        setFragrances(resFragrances.data);
+        setPromotions(resPromotions.data);
       } catch (error) {
         console.error("Error cargando lanzamientos:", error);
       }
     };
 
-    fetchLaunches();
+    fetchData();
   }, []);
 
   if (products.length === 0) {
@@ -55,9 +65,7 @@ const LaunchesPage = () => {
           <p className="hero-description">{heroProduct.description}</p>
           {heroProduct.discount > 0 ? (
             <p className="hero-price">
-              <span className="hero-old-price">
-                ${heroProduct.price}
-              </span>{" "}
+              <span className="hero-old-price">${heroProduct.price}</span>{" "}
               <strong>
                 $
                 {(
@@ -85,7 +93,12 @@ const LaunchesPage = () => {
           <h4 className="more-launches-title">Otros lanzamientos</h4>
           <div className="products-grid">
             {otherProducts.map((product) => (
-              <ProductCardHome key={product.id} product={product} />
+              <ProductCardHome
+                key={product.id}
+                product={product}
+                fragrances={fragrances}
+                promotions={promotions}
+              />
             ))}
           </div>
         </>
