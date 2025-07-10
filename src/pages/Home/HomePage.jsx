@@ -121,7 +121,7 @@ const HomePage = () => {
       {/* Categorías */}
       <section className="home-categories">
         <h3>Explorá nuestras categorías</h3>
-        <div className="category-buttons">
+        <div className="home-category-buttons">
           {categorias
             .filter(Boolean)
             .map((cat) => {

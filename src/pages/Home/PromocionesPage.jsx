@@ -32,48 +32,51 @@ const PromotionsPage = () => {
 
   return (
     <div className="promotions-page">
-      <h2>Promociones y Ofertas</h2>
-      <p className="promotions-subtitle">
-        Aprovechá los descuentos exclusivos por tiempo limitado
-      </p>
+      <div className="promotions-container">
+        <h2>🎁 Promociones y Ofertas</h2>
+        <p className="promotions-subtitle">
+          Aprovechá los descuentos exclusivos por tiempo limitado
+        </p>
 
-      {promotions.map((promo) => {
-        // Filtrar productos que pertenezcan a esta promo
-        const promoProducts = products.filter(
-          (p) => p.promotion_id === promo.id
-        );
+        {promotions.map((promo) => {
+          const promoProducts = products.filter(
+            (p) => p.promotion_id === promo.id
+          );
 
-        return (
-          <div key={promo.id} className="promo-section">
-            <div className="promo-header">
-              <h3>{promo.title}</h3>
-              <p>{promo.description}</p>
-              {promo.discount && (
-                <p className="promo-discount">{promo.discount}% OFF</p>
-              )}
-              {promo.end_date && (
-                <p className="promo-dates">Válido hasta {promo.end_date}</p>
+          return (
+            <div key={promo.id} className="promo-section">
+              <div className="promo-header">
+                <h3>🔥 {promo.title}</h3>
+                <p>{promo.description}</p>
+                {promo.discount && (
+                  <p className="promo-discount">{promo.discount}% OFF</p>
+                )}
+                {promo.end_date && (
+                  <p className="promo-dates">
+                    Válido hasta {promo.end_date}
+                  </p>
+                )}
+              </div>
+              {promoProducts.length > 0 ? (
+                <div className="products-grid">
+                  {promoProducts.map((product) => (
+                    <ProductCardHome
+                      key={product.id}
+                      product={product}
+                      fragrances={fragrances}
+                      promotions={promotions}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <p className="no-products">
+                  No hay productos en esta promoción.
+                </p>
               )}
             </div>
-            {promoProducts.length > 0 ? (
-              <div className="products-grid">
-                {promoProducts.map((product) => (
-                  <ProductCardHome
-                    key={product.id}
-                    product={product}
-                    fragrances={fragrances}
-                    promotions={promotions}
-                  />
-                ))}
-              </div>
-            ) : (
-              <p className="no-products">
-                No hay productos en esta promoción.
-              </p>
-            )}
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -1,7 +1,9 @@
 .launches-page {
-  max-width: 1200px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 24px 16px;
+  background: #fff5f3;
+
 }
 
 .launches-page h2 {
@@ -16,76 +18,99 @@
   margin-bottom: 32px;
 }
 
-.hero-launch {
+.launch-card {
   display: flex;
   flex-wrap: wrap;
-  background: #f9f9f9;
+  background: #fff;
   border-radius: 8px;
+  border: 1px solid #f0d6cd;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  margin: 0 auto 32px auto;
+  /* Centramos */
+  max-width: 800px;
+  /* Achicamos ancho total */
   overflow: hidden;
-  margin-bottom: 40px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  position: relative;
 }
 
-.hero-image {
-  flex: 1 1 300px;
-  min-width: 200px;
-  max-width: 300px;  /* Agregá este límite */
-  object-fit: cover;
+.launch-image-container {
+  flex: 1 1 400px;
+  max-width: 450px;
+}
+
+.launch-image {
   width: 100%;
   height: auto;
+  display: block;
 }
 
-.hero-info {
+.launch-details {
   flex: 1 1 300px;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: relative;
 }
 
-.hero-info h3 {
-  margin: 0 0 8px;
+.launch-discount-badge {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: #c0392b;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+.launch-details h3 {
+  margin-top: 32px;
   font-size: 1.4rem;
 }
 
-.hero-category {
-  font-weight: bold;
+.launch-fragrance {
+  font-size: 0.95rem;
   color: #3f76b6;
-  margin-bottom: 8px;
+  margin: 6px 0;
 }
 
-.hero-description {
+.launch-description {
+  margin: 8px 0;
   color: #555;
-  margin-bottom: 12px;
 }
 
-.hero-price {
+.launch-price {
   font-size: 1.2rem;
-  margin-bottom: 16px;
+  margin: 12px 0;
+  color: #2d2ae2;
 }
 
-.hero-old-price {
+.launch-old-price {
   text-decoration: line-through;
   color: #999;
   margin-right: 8px;
 }
 
-.hero-btn {
-  background: #3f76b6;
+.launch-stock {
+  font-size: 0.95rem;
+  color: #8b4513;
+  margin-bottom: 12px;
+}
+
+.launch-btn {
+  background: #a97c50;
   color: white;
   border: none;
   padding: 10px 16px;
   border-radius: 4px;
   cursor: pointer;
-  width: fit-content;
   transition: background 0.3s;
 }
 
-.hero-btn:hover {
-  background: #2e4386;
+.launch-btn:hover {
+  background: #7f5b3e;
 }
 
 .more-launches-title {
-  margin-bottom: 16px;
+  margin: 24px 0 16px;
   font-size: 1.2rem;
 }

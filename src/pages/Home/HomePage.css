@@ -54,25 +54,35 @@
   margin-bottom: 20px;
 }
 
-.category-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+.home-category-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 12px;
 }
 
-.category-buttons button {
+.home-category-buttons button {
   background-color: #e9c0b4;
   border: none;
-  padding: 10px 20px;
-  font-weight: bold;
-  border-radius: 5px;
+  padding: 10px 12px;
+  font-weight: 600;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.2s;
+  color: #42261a;
+  font-size: 0.95rem;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.category-buttons button:hover {
+.home-category-buttons button:hover {
   background-color: #d1a79b;
+  transform: translateY(-2px);
 }
 
 /* Secciones de productos recientes y promociones */
@@ -117,7 +127,7 @@
     padding: 10px 20px;
   }
 
-  .category-buttons {
+  .home-category-buttons {
     flex-direction: column;
     gap: 10px;
   }
@@ -136,15 +146,27 @@
 }
 
 /* Fade-in de productos */
-.products-row > * {
+.products-row>* {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.6s forwards;
 }
-.products-row > *:nth-child(1) { animation-delay: 0s; }
-.products-row > *:nth-child(2) { animation-delay: 0.1s; }
-.products-row > *:nth-child(3) { animation-delay: 0.2s; }
-.products-row > *:nth-child(4) { animation-delay: 0.3s; }
+
+.products-row>*:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.products-row>*:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.products-row>*:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.products-row>*:nth-child(4) {
+  animation-delay: 0.3s;
+}
 
 @keyframes fadeInUp {
   to {
@@ -166,16 +188,26 @@
   transition: all 0.3s ease;
   animation: pulse 2s infinite;
 }
+
 @keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(169, 124, 80, 0.4); }
-  70% { box-shadow: 0 0 0 10px rgba(169, 124, 80, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(169, 124, 80, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(169, 124, 80, 0.4);
+  }
+
+  70% {
+    box-shadow: 0 0 0 10px rgba(169, 124, 80, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(169, 124, 80, 0);
+  }
 }
 
 /* Gradientes suaves en secciones */
 .home-launches {
   background: linear-gradient(180deg, #fff6f4 0%, #fef0ea 100%);
 }
+
 .home-promotions {
   background: linear-gradient(180deg, #fef0ea 0%, #fff6f4 100%);
 }

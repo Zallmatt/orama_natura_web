@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import ProductCardHome from "../../components/Home/ProductCardHome";
 import "./LaunchesPage.css";
 
 const LaunchesPage = () => {
   const [products, setProducts] = useState([]);
   const [fragrances, setFragrances] = useState([]);
   const [promotions, setPromotions] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,7 +15,7 @@ const LaunchesPage = () => {
         const [resProducts, resFragrances, resPromotions] = await Promise.all([
           api.get("/products"),
           api.get("/fragrances"),
-          api.get("/promotions")
+          api.get("/promotions"),
         ]);
 
         const launches = resProducts.data
@@ -46,6 +47,68 @@ const LaunchesPage = () => {
   const heroProduct = products[0];
   const otherProducts = products.slice(1);
 
+  const formatPrice = (price) =>
+    new Intl.NumberFormat("es-ES", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(price);
+
+  const renderCard = (product) => (
+    <div key={product.id} className="launch-card">
+      <div className="launch-image-container">
+        <img
+          src={product.image_url}
+          alt={product.name}
+          className="launch-image"
+        />
+      </div>
+      <div className="launch-details">
+        {product.discount > 0 && (
+          <span className="launch-discount-badge">
+            -{Math.round(product.discount)}%
+          </span>
+        )}
+        <h3>{product.name}</h3>
+        {product.fragrance && (
+          <p className="launch-fragrance">
+            Fragancia:{" "}
+            {
+              fragrances.find((f) => f.id === product.fragrance)?.name ||
+              product.fragrance
+            }
+          </p>
+        )}
+        <p className="launch-description">{product.description}</p>
+        <p className="launch-price">
+          {product.discount > 0 ? (
+            <>
+              <span className="launch-old-price">
+                ${formatPrice(product.price)}
+              </span>{" "}
+              <strong>
+                $
+                {formatPrice(
+                  product.price * (1 - product.discount / 100)
+                )}
+              </strong>
+            </>
+          ) : (
+            <strong>${formatPrice(product.price)}</strong>
+          )}
+        </p>
+        <p className="launch-stock">
+          Stock disponible: {product.stock}
+        </p>
+        <button
+          className="launch-btn"
+          onClick={() => navigate(`/producto/${product.id}`)}
+        >
+          Ver más
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="launches-page">
       <h2>🆕 Últimos Lanzamientos</h2>
@@ -53,53 +116,12 @@ const LaunchesPage = () => {
         Descubrí nuestros productos recién llegados
       </p>
 
-      <div className="hero-launch">
-        <img
-          src={heroProduct.image_url}
-          alt={heroProduct.name}
-          className="hero-image"
-        />
-        <div className="hero-info">
-          <h3>{heroProduct.name}</h3>
-          <p className="hero-category">{heroProduct.categories?.name}</p>
-          <p className="hero-description">{heroProduct.description}</p>
-          {heroProduct.discount > 0 ? (
-            <p className="hero-price">
-              <span className="hero-old-price">${heroProduct.price}</span>{" "}
-              <strong>
-                $
-                {(
-                  heroProduct.price *
-                  (1 - heroProduct.discount / 100)
-                ).toFixed(2)}
-              </strong>
-            </p>
-          ) : (
-            <p className="hero-price">
-              <strong>${heroProduct.price}</strong>
-            </p>
-          )}
-          <button
-            className="hero-btn"
-            onClick={() => console.log("Ver producto")}
-          >
-            Ver más
-          </button>
-        </div>
-      </div>
+      {renderCard(heroProduct)}
 
       {otherProducts.length > 0 && (
         <>
-          <h4 className="more-launches-title">Otros lanzamientos</h4>
-          <div className="products-grid">
-            {otherProducts.map((product) => (
-              <ProductCardHome
-                key={product.id}
-                product={product}
-                fragrances={fragrances}
-                promotions={promotions}
-              />
-            ))}
+          <div className="launch-list">
+            {otherProducts.map(renderCard)}
           </div>
         </>
       )}
