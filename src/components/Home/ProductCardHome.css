@@ -103,7 +103,7 @@
 .final-price {
   font-size: 1.3rem;
   font-weight: bold;
-  color: #845f3a;
+  color: #2d2ae2;
 }
 
 
@@ -133,4 +133,65 @@
 
 .product-buy-btn:hover {
   background: #845f3a;
+}
+
+.product-promotion-below {
+  font-size: 0.85rem;
+  color: #d63384; /* Rosa promo */
+  margin: 4px 0;
+  text-align: center;
+}
+
+/* Grillas responsive */
+@media (max-width: 768px) {
+  .product-card-home {
+    max-width: 80%;
+  }
+
+  .product-image img {
+    height: 180px;
+  }
+
+  .product-name {
+    font-size: 1rem;
+  }
+
+  .final-price {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card-home {
+    max-width: 80%;
+    border-radius: 8px;
+    padding: 0;
+  }
+
+  .product-image img {
+    height: 160px;
+  }
+
+  .product-info {
+    padding: 12px;
+  }
+
+  .product-buy-btn {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .product-prices {
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .old-price {
+    font-size: 0.85rem;
+  }
+
+  .final-price {
+    font-size: 1.2rem;
+  }
 }

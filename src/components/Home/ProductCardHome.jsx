@@ -14,11 +14,20 @@ const ProductCardHome = ({ product, fragrances, promotions }) => {
     promotion_id
   } = product;
 
-  const finalPrice = (price * (1 - discount / 100)).toFixed(2);
+  const finalPrice = (price * (1 - discount / 100)).toLocaleString("es-ES", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
+  const formattedPrice = price.toLocaleString("es-ES", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+
   const navigate = useNavigate();
 
-  const fragrance = fragrances.find(f => f.id === fragrance_id);
-  const promotion = promotions.find(p => p.id === promotion_id);
+  const fragrance = fragrances.find((f) => f.id === fragrance_id);
+  const promotion = promotions.find((p) => p.id === promotion_id);
 
   return (
     <div className="product-card-home">
@@ -39,19 +48,25 @@ const ProductCardHome = ({ product, fragrances, promotions }) => {
         )}
 
         {promotion && (
-          <p className="product-promotion">
-            <strong>Promo:</strong> {promotion.title}
+          <p className="product-promotion-below">
+            🎁 <strong>Promo:</strong> {promotion.title}
           </p>
         )}
 
         <div className="product-prices">
-          {discount > 0 && <span className="old-price">${price}</span>}
-          <span className="final-price">${finalPrice}</span>
+          {discount > 0 ? (
+            <>
+              <span className="old-price">${formattedPrice}</span>
+              <span className="final-price">${finalPrice}</span>
+            </>
+          ) : (
+            <span className="final-price">${formattedPrice}</span>
+          )}
         </div>
-
 
         {stock !== undefined && (
           <p className={`product-stock ${stock <= 5 ? "low-stock" : ""}`}>
+            {stock <= 5 ? "⚠️ " : ""}
             Stock disponible: {stock}
           </p>
         )}
@@ -63,7 +78,6 @@ const ProductCardHome = ({ product, fragrances, promotions }) => {
           Ver más
         </button>
       </div>
-
     </div>
   );
 };

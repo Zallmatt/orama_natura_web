@@ -126,9 +126,13 @@ const HomePage = () => {
             .filter(Boolean)
             .map((cat) => {
               let emoji = "🌿";
-              if (cat.toLowerCase().includes("crema")) emoji = "🧴";
-              if (cat.toLowerCase().includes("jabón")) emoji = "🧼";
-              if (cat.toLowerCase().includes("perfume")) emoji = "💧";
+              if (cat.toLowerCase().includes("femenino")) emoji = "🌸";
+              if (cat.toLowerCase().includes("masculino")) emoji = "🕺";
+              if (cat.toLowerCase().includes("unisex")) emoji = "🌈";
+              if (cat.toLowerCase().includes("niños")) emoji = "🧒";
+              if (cat.toLowerCase().includes("rostro")) emoji = "😊";
+              if (cat.toLowerCase().includes("cabello")) emoji = "💇‍♀️";
+              if (cat.toLowerCase().includes("combos")) emoji = "🎁";
 
               return (
                 <button key={cat}>
