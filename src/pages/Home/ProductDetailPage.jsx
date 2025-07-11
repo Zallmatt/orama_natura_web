@@ -9,6 +9,7 @@ const ProductDetailPage = () => {
   const [product, setProduct] = useState(null);
   const [fragrances, setFragrances] = useState([]);
   const [promotions, setPromotions] = useState([]);
+  const [quantity, setQuantity] = useState(1);
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -37,28 +38,52 @@ const ProductDetailPage = () => {
   const finalPrice = (
     product.price *
     (1 - product.discount / 100)
-  ).toFixed(2);
+  );
 
-  // Buscar fragancia y promoción por ID
   const fragrance = fragrances.find(f => f.id === product.fragrance_id);
   const promotion = promotions.find(p => p.id === product.promotion_id);
+
+  const formattedOriginalPrice = product.price.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 2,
+  });
+
+  const formattedFinalPrice = finalPrice.toLocaleString('es-AR', {
+    style: 'currency',
+    currency: 'ARS',
+    minimumFractionDigits: 2,
+  });
 
   return (
     <div className="product-detail-page">
       <div className="product-detail-container">
-        <img
-          src={product.image_url}
-          alt={product.name}
-          className="product-detail-image"
-        />
+        <div className="image-wrapper">
+          {product.discount > 0 && (
+            <span className="discount-badge">
+              -{product.discount}%
+            </span>
+          )}
+          <img
+            src={product.image_url}
+            alt={product.name}
+            className="product-detail-image"
+          />
+        </div>
         <div className="product-detail-info">
           <h2>{product.name}</h2>
-          <p className="product-category">{product.categories?.name}</p>
-          {fragrance && (
-            <p className="product-fragrance">
-              Fragancia: {fragrance.name}
+          {(product.categories?.name || fragrance) && (
+            <p className="product-category">
+              {product.categories?.name}
+              {fragrance && (
+                <>
+                  {" • "}
+                  Fragancia: {fragrance.name}
+                </>
+              )}
             </p>
           )}
+
           {promotion && (
             <p className="product-promotion">
               Promoción: {promotion.title}
@@ -66,16 +91,12 @@ const ProductDetailPage = () => {
           )}
           <p className="product-description">{product.description}</p>
 
-          {product.discount > 0 ? (
-            <p className="product-price">
-              <span className="old-price">${product.price}</span>{" "}
-              <strong>${finalPrice}</strong>
-            </p>
-          ) : (
-            <p className="product-price">
-              <strong>${product.price}</strong>
-            </p>
-          )}
+          <p className="product-price">
+            {product.discount > 0 && (
+              <span className="old-price">{formattedOriginalPrice}</span>
+            )}
+            <strong>{formattedFinalPrice}</strong>
+          </p>
 
           <p className="product-stock">
             Stock disponible: {product.stock}
@@ -85,6 +106,17 @@ const ProductDetailPage = () => {
             <p className="product-launch">🌟 Producto nuevo</p>
           )}
 
+          <div className="quantity-wrapper">
+            <label>Cantidad:</label>
+            <input
+              type="number"
+              min="1"
+              max={product.stock}
+              value={quantity}
+              onChange={(e) => setQuantity(parseInt(e.target.value) || 1)}
+            />
+          </div>
+
           <button
             className="add-to-cart-btn"
             onClick={() =>
@@ -93,15 +125,18 @@ const ProductDetailPage = () => {
                 name: product.name,
                 price: product.price,
                 discount: product.discount,
+                fragrance: fragrance?.name,   // <--- esta línea
+                stock: product.stock,
                 image: product.image_url,
+                quantity
               })
             }
           >
-            Agregar al carrito
-          </button>
-        </div>
+          Agregar al carrito
+        </button>
       </div>
     </div>
+    </div >
   );
 };
 

@@ -7,27 +7,41 @@ const cartReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       return state.some(item => item.id === action.payload.id)
-        ? state.map(item =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          )
+        ? state.map(item => {
+          if (item.id === action.payload.id) {
+            const quantityToAdd = Number(action.payload.quantity) || 1;
+            const newQuantity = item.quantity + quantityToAdd;
+            const maxQuantity = item.stock ?? newQuantity; // si no tiene stock, no limitar
+            return {
+              ...item,
+              quantity: Math.min(newQuantity, maxQuantity)
+            };
+          }
+          return item;
+        })
         : [
-            ...state,
-            { ...action.payload, quantity: 1 }
-          ];
-    case "REMOVE_FROM_CART":
-      return state.filter(item => item.id !== action.payload);
-    case "CLEAR_CART":
-      return [];
-    case "DECREASE_QUANTITY":
+          ...state,
+          {
+            ...action.payload,
+            quantity: Number(action.payload.quantity) || 1
+          }
+        ];
+
+    case "REMOVE_QUANTITY":
       return state
         .map(item =>
-          item.id === action.payload
-            ? { ...item, quantity: item.quantity - 1 }
+          item.id === action.payload.id
+            ? { ...item, quantity: item.quantity - action.payload.quantity }
             : item
         )
         .filter(item => item.quantity > 0);
+
+    case "REMOVE_FROM_CART":
+      return state.filter(item => item.id !== action.payload);
+
+    case "CLEAR_CART":
+      return [];
+
     default:
       return state;
   }
@@ -41,39 +55,18 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
-  const removeFromCart = (id) => {
-    dispatch({ type: "REMOVE_FROM_CART", payload: id });
+  const removeFromCart = (id, quantity = null) => {
+    if (quantity === null) {
+      // Eliminar todo el producto
+      dispatch({ type: "REMOVE_FROM_CART", payload: id });
+    } else {
+      // Quitar una cantidad específica
+      dispatch({ type: "REMOVE_QUANTITY", payload: { id, quantity } });
+    }
   };
 
   const clearCart = () => {
     dispatch({ type: "CLEAR_CART" });
-  };
-
-  const decreaseQuantity = (id) => {
-    dispatch({ type: "DECREASE_QUANTITY", payload: id });
-  };
-
-  const sendToWhatsApp = () => {
-    let message = "¡Hola! Quisiera hacer un pedido:\n\n";
-    cart.forEach(item => {
-      const discountedPrice = (
-        item.price - (item.price * item.discount / 100)
-      ).toFixed(2);
-      message += `Producto: ${item.name} - Cantidad: ${item.quantity} - Precio con descuento: $${discountedPrice}\n`;
-    });
-
-    const total = cart
-      .reduce((total, item) => {
-        const discountedPrice = item.price - (item.price * item.discount / 100);
-        return total + discountedPrice * item.quantity;
-      }, 0)
-      .toFixed(2);
-
-    message += `\nTotal: $${total}`;
-    message += `\nOpción de entrega: ${deliveryOption === "envio" ? "Envío" : "Pasar a retirar"}`;
-
-    const whatsappURL = `https://wa.me/5493794832031?text=${encodeURIComponent(message)}`;
-    window.open(whatsappURL, "_blank");
   };
 
   return (
@@ -83,10 +76,8 @@ export const CartProvider = ({ children }) => {
         addToCart,
         removeFromCart,
         clearCart,
-        decreaseQuantity,
         deliveryOption,
-        setDeliveryOption,
-        sendToWhatsApp
+        setDeliveryOption
       }}
     >
       {children}

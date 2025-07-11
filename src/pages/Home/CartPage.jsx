@@ -6,7 +6,14 @@ import CheckoutContactForm from "../../components/Home/CheckoutContactForm";
 import "./CartPage.css";
 
 const CartPage = () => {
-  const { cart, clearCart, deliveryOption, setDeliveryOption, removeFromCart } = useCart();
+  const {
+    cart,
+    clearCart,
+    deliveryOption,
+    setDeliveryOption,
+    removeFromCart,
+    addToCart
+  } = useCart();
   const { isAuthenticated, user } = useAuth();
 
   const [contactData, setContactData] = useState({
@@ -16,29 +23,60 @@ const CartPage = () => {
 
   const calculateTotal = () =>
     cart
-      .reduce(
-        (total, item) =>
-          total +
-          (item.price - item.price * (item.discount / 100)) * item.quantity,
-        0
-      )
+      .reduce((total, item) => {
+        const price = Number(item.price) || 0;
+        const discount = Number(item.discount) || 0;
+        const quantity = Number(item.quantity) || 0;
+        const subtotal = (price - price * (discount / 100)) * quantity;
+        return total + subtotal;
+      }, 0)
       .toFixed(2);
 
   const sendToWhatsApp = (contact) => {
     let message = `¡Hola! Quisiera hacer un pedido:\n\n`;
 
     cart.forEach(item => {
-      const finalPrice = (item.price - item.price * (item.discount / 100)).toFixed(2);
-      message += `✅ *${item.name}*\nCantidad: ${item.quantity}\nPrecio unitario: $${finalPrice}\n\n`;
+      const unitPrice = Number(item.price) - Number(item.price) * (Number(item.discount) / 100);
+      const subtotal = unitPrice * Number(item.quantity);
+
+      const formattedUnitPrice = unitPrice.toLocaleString("es-AR", {
+        style: "currency",
+        currency: "ARS",
+        minimumFractionDigits: 2
+      });
+
+      const formattedSubtotal = subtotal.toLocaleString("es-AR", {
+        style: "currency",
+        currency: "ARS",
+        minimumFractionDigits: 2
+      });
+
+      message += `✅ *${item.name}*\n`;
+
+      if (item.fragrance) {
+        message += `🔹 Fragancia: ${item.fragrance}\n`;
+      }
+
+      message += `🔸 Cantidad: ${item.quantity}\n`;
+      message += `💵 Precio unitario: ${formattedUnitPrice}\n`;
+      message += `💰 Subtotal: ${formattedSubtotal}\n\n`;
     });
 
-    message += `💰 *Total:* $${calculateTotal()}\n`;
-    message += `🚚 *Entrega:* ${deliveryOption === 'envio' ? 'Envío' : 'Retiro en local'}\n`;
-    message += `🙍 *Nombre:* ${contact.name}\n📞 *Teléfono:* ${contact.phone}\n`;
+    const totalFormatted = Number(calculateTotal()).toLocaleString("es-AR", {
+      style: "currency",
+      currency: "ARS",
+      minimumFractionDigits: 2
+    });
+
+    message += `*Total del pedido:* ${totalFormatted}\n`;
+    message += `*Entrega:* ${deliveryOption === "envio" ? "Envío a domicilio" : "Retiro en local"}\n\n`;
+    message += `*Comprador:* ${contact.name}\n`;
+    message += `*Teléfono:* ${contact.phone}\n`;
 
     const whatsappURL = `https://wa.me/5493794832031?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, "_blank");
   };
+
 
   const handleCheckout = async () => {
     if (!contactData.name || !contactData.phone) {
@@ -78,52 +116,126 @@ const CartPage = () => {
         <p>El carrito está vacío.</p>
       ) : (
         <>
-          <ul>
-            {cart.map((item) => (
-              <li key={item.id}>
-                {item.name} - Cant: {item.quantity}
-                <button onClick={() => removeFromCart(item.id)}>Eliminar</button>
-              </li>
-            ))}
+          <ul className="cart-list">
+            {cart.map((item) => {
+              const unitPrice = Number(item.price) - Number(item.price) * (Number(item.discount) / 100);
+              const subtotal = unitPrice * Number(item.quantity);
+
+              const formattedUnitPrice = unitPrice.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 2
+              });
+
+              const formattedSubtotal = subtotal.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 2
+              });
+
+              return (
+                <li key={item.id} className="cart-item">
+                  <div className="cart-info">
+                    <div className="cart-main">
+                      {item.image && (
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className="cart-thumbnail"
+                        />
+                      )}
+                      <div>
+                        <strong>{item.name}</strong>
+                        {item.fragrance && (
+                          <p className="cart-fragrance">Fragancia: {item.fragrance}</p>
+                        )}
+                        <p className="cart-price">
+                          Precio unitario: {formattedUnitPrice}
+                        </p>
+                        <p className="cart-subtotal">
+                          Subtotal: {formattedSubtotal}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="quantity-controls">
+                      <span className="quantity-label">Cantidad:</span>
+                      <button
+                        onClick={() => removeFromCart(item.id, 1)}
+                      >
+                        -
+                      </button>
+                      <span>{Number(item.quantity) || 0}</span>
+                      <button
+                        disabled={item.quantity >= item.stock}
+                        onClick={() =>
+                          addToCart({
+                            ...item,
+                            quantity: 1
+                          })
+                        }
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+                  <button
+                    className="remove-btn"
+                    onClick={() => removeFromCart(item.id, item.quantity)}
+                  >
+                    Eliminar
+                  </button>
+                </li>
+              );
+            })}
           </ul>
 
-          <p><strong>Total:</strong> ${calculateTotal()}</p>
-
-          {/* Formulario de contacto */}
-          <CheckoutContactForm
-            contactData={contactData}
-            setContactData={setContactData}
-          />
-
-          {/* Opciones de entrega */}
-          <div className="delivery-options">
-            <label>
-              <input
-                type="radio"
-                name="delivery"
-                value="envio"
-                checked={deliveryOption === "envio"}
-                onChange={() => setDeliveryOption("envio")}
-              />
-              Envío
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="delivery"
-                value="retiro"
-                checked={deliveryOption === "retiro"}
-                onChange={() => setDeliveryOption("retiro")}
-              />
-              Pasar a retirar
-            </label>
+          <div className="cart-total">
+            <span>
+              <strong>Total:</strong>{" "}
+              {Number(calculateTotal()).toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 2
+              })}
+            </span>
+            <button className="clear-btn" onClick={clearCart}>
+              Vaciar carrito
+            </button>
           </div>
 
-          <button className="checkout-btn" onClick={handleCheckout}>
-            Confirmar compra
-          </button>
+          {/* Opciones de entrega arriba del formulario */}
+          <div className="delivery-options">
+            <button
+              type="button"
+              className={deliveryOption === "envio" ? "active" : ""}
+              onClick={() => setDeliveryOption("envio")}
+            >
+              🚚 Envío
+            </button>
+            <button
+              type="button"
+              className={deliveryOption === "retiro" ? "active" : ""}
+              onClick={() => setDeliveryOption("retiro")}
+            >
+              🛍️ Pasar a retirar
+            </button>
+          </div>
 
-          <button onClick={clearCart}>Vaciar carrito</button>
+          {/* Formulario destacado */}
+          <div className="checkout-form">
+            <h3>Datos del comprador</h3>
+            <CheckoutContactForm
+              contactData={contactData}
+              setContactData={setContactData}
+            />
+          </div>
+
+          <div className="cart-actions">
+            <button className="checkout-btn" onClick={handleCheckout}>
+              Confirmar compra
+            </button>
+          </div>
         </>
       )}
     </div>

@@ -2,51 +2,215 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 24px 16px;
+  background: #fff5f3;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.cart-page h2 {
+  color: #3c2b1e;
+  margin-bottom: 20px;
 }
 
 .cart-list {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 20px 0;
 }
 
 .cart-item {
   display: flex;
-  gap: 16px;
-  border-bottom: 1px solid #ddd;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 12px 0;
-}
-
-.cart-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 4px;
+  border-bottom: 1px solid #ddd;
+  gap: 12px;
 }
 
 .cart-info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.cart-actions button {
-  margin-right: 8px;
-  background: #3f76b6;
+.cart-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.cart-thumbnail {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.cart-fragrance {
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.cart-price,
+.cart-subtotal {
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.quantity-label {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.quantity-controls button {
+  background: #a97c50;
   color: white;
   border: none;
-  padding: 4px 8px;
+  padding: 4px 10px;
+  font-weight: bold;
   cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
 }
 
-.cart-summary {
-  text-align: right;
-  margin-top: 16px;
+.quantity-controls button:hover {
+  background: #8c643f;
 }
 
-.cart-summary button {
-  margin-left: 8px;
-  background: #2e4386;
+.quantity-controls span {
+  min-width: 20px;
+  text-align: center;
+  font-weight: 500;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.remove-btn {
+  background: #d9534f;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 6px 10px;
   cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.3s;
+  align-self: flex-start;
+}
+
+.remove-btn:hover {
+  background: #c9302c;
+}
+
+/* Total con botón al lado */
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.4rem;
+  margin: 20px 0;
+  color: #3c2b1e;
+  font-weight: 700;
+}
+
+.cart-total span {
+  display: inline-block;
+}
+
+/* Botones de entrega */
+.delivery-options {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.delivery-options button {
+  display: block;
+  width: 100%;
+  background: #f0d6cd;
+  border: 1px solid #a97c50;
+  color: #3e1f0f;
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  text-align: left;
+  transition: background 0.3s, color 0.3s;
+}
+
+.delivery-options button:hover {
+  background: #ddd;
+}
+
+.delivery-options button.active {
+  background: #a97c50;
+  color: white;
+  border-color: #8c643f;
+}
+
+/* Acciones de carrito */
+.cart-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Botón Confirmar compra */
+.checkout-btn {
+  flex: 1;
+  background: #a97c50;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.checkout-btn:hover {
+  background: #8c643f;
+}
+
+/* Botón Vaciar carrito */
+.clear-btn {
+  background: #999;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.3s;
+}
+
+.clear-btn:hover {
+  background: #777;
+}
+
+/* Formulario de contacto */
+.checkout-form {
+  background: #f7f3ef;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin: 20px 0;
+}
+
+.checkout-form h3 {
+  margin-top: 0;
+  font-size: 1rem;
+  color: #3c2b1e;
 }
