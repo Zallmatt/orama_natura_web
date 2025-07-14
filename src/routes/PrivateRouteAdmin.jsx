@@ -3,7 +3,16 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const PrivateRouteAdmin = ({ children }) => {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, isLoadingAuth, user } = useAuth();
+
+  if (isLoadingAuth) {
+    // Mientras está chequeando si el usuario está autenticado
+    return (
+      <div style={{ textAlign: "center", marginTop: "2rem" }}>
+        <p>Verificando acceso...</p>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     // Si no está logueado, mandarlo al login

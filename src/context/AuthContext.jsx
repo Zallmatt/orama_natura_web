@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [isLoadingAuth, setIsLoadingAuth] = useState(true); // 👈 NUEVO
 
   const login = async (credentials) => {
     try {
@@ -16,10 +17,8 @@ export const AuthProvider = ({ children }) => {
       setUser(res.user);
       setToken(res.token);
       setIsAuthenticated(true);
-
       localStorage.setItem("orama_token", res.token);
       localStorage.setItem("orama_user", JSON.stringify(res.user));
-      console.log("Usuario autenticado:", res.user);
       return { success: true, user: res.user };
     } catch (error) {
       console.error("Error de login:", error);
@@ -29,7 +28,6 @@ export const AuthProvider = ({ children }) => {
       };
     }
   };
-
 
   const logout = () => {
     setUser(null);
@@ -50,18 +48,18 @@ export const AuthProvider = ({ children }) => {
         setIsAuthenticated(true);
       } catch (err) {
         console.error("Error parsing stored user:", err);
-        // Por seguridad, limpiamos
         localStorage.removeItem("orama_token");
         localStorage.removeItem("orama_user");
       }
     }
+    setIsLoadingAuth(false); // 👈 Importante: termina la carga
   }, []);
-
 
   return (
     <AuthContext.Provider
       value={{
         isAuthenticated,
+        isLoadingAuth, // 👈 lo exportamos
         user,
         token,
         login,

@@ -10,7 +10,7 @@ const ContactPage = () => {
             <p><strong>Tienda física:</strong></p>
             <p><em>Barrio Quintana, Yugoslavia 4000, Ctes, Arg.</em></p>
             <p><strong>Teléfono:</strong></p>
-            <p>3794 832031</p>
+            <p>+54 3794-832031</p>
 
             {/* Mapa embebido */}
             <div className="map-container">

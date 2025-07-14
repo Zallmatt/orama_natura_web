@@ -1,6 +1,7 @@
 /* Contenedor general */
 .productos-page {
   padding: 20px;
+  background-color: #fffaf8;
 }
 
 /* Título */
@@ -110,3 +111,4 @@
   padding: 6px 12px;
   font-size: 14px;
 }
+

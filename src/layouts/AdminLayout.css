@@ -1,7 +1,7 @@
-
 .admin-body {
   display: flex;
   flex: 1;
+  background-color: #fffaf8;
 }
 
 .admin-sidebar {
@@ -30,6 +30,39 @@
 }
 
 .admin-content {
+  background-color: #fff5f3;
   flex: 1;
   padding: 2rem;
+}
+
+.admin-header-mobile {
+  display: none;
+  background: #f9c2b2;
+  border-bottom: 1px solid #ddd;
+}
+
+.sidebar-toggle {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .admin-header-mobile {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .admin-body {
+    display: block;
+  }
+
+  .admin-content {
+    background-color: #fff5f3;
+    width: 100%;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
 }

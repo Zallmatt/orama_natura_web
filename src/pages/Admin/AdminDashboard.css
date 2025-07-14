@@ -1,12 +1,15 @@
 .admin-dashboard {
   align-items: center;
   text-align: center;
+  padding: 20px;
 }
 
+/* Título */
 .admin-dashboard h1 {
   margin-bottom: 20px;
 }
 
+/* Contenedor de tarjetas */
 .dashboard-stats {
   display: flex;
   gap: 20px;
@@ -14,13 +17,16 @@
   margin-bottom: 40px;
   border-bottom: 1px solid #eee;
   padding-bottom: 20px;
+  justify-content: center;
 }
 
+/* Cada tarjeta */
 .stat-card {
-  background-color: #fff4f0;
+  background-color: #f3ebe4;
   padding: 20px;
   border-radius: 8px;
   flex: 1 1 200px;
+  max-width: 250px;
   text-align: center;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -28,7 +34,6 @@
 
 .stat-card h3 {
   font-size: 2rem;
-  /* Más grande */
   margin: 0;
   color: #a97c50;
 }
@@ -36,7 +41,6 @@
 .stat-card p {
   margin: 5px 0 0;
   font-size: 0.95rem;
-  /* Un poco más legible */
   color: #555;
 }
 
@@ -45,13 +49,15 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
+/* Contenedor de botones */
 .dashboard-actions {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
   align-items: center;
-  text-align: center;
   justify-content: center;
+  text-align: center;
+  margin-top: 20px;
 }
 
 .dashboard-actions button {
@@ -64,7 +70,6 @@
   font-weight: 500;
   transition: background 0.3s ease;
   width: 200px;
-
 }
 
 .dashboard-actions button:hover {
@@ -72,7 +77,49 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
+/* 🌱 Mobile */
 @media (max-width: 600px) {
+  .admin-dashboard {
+    align-items: center;
+    text-align: center;
+  }
+
+  .admin-dashboard h1 {
+    font-size: 1.5rem;
+    word-break: break-word;
+  }
+
+  .dashboard-stats {
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .stat-card {
+    width: 220px;
+    /* ancho fijo */
+    min-height: 180px;
+    /* altura mínima */
+    padding: 16px;
+    margin: 0 auto;
+    /* centradas */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* centrar contenido verticalmente */
+    align-items: center;
+    /* centrar contenido horizontalmente */
+    border-radius: 12px;
+  }
+
+  .stat-card h3 {
+    font-size: 1.6rem;
+  }
+
+  .stat-card p {
+    font-size: 0.9rem;
+  }
+
   .dashboard-actions {
     flex-direction: column;
     gap: 10px;
@@ -80,5 +127,7 @@
 
   .dashboard-actions button {
     width: 100%;
+    padding: 10px;
+    font-size: 0.95rem;
   }
 }

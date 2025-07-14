@@ -2,6 +2,7 @@
   width: 100%;
   border-collapse: collapse;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  background-color: #f3ebe4;
 }
 
 .productos-list th,
@@ -80,4 +81,104 @@
 .producto-inactivo {
   background-color: #f8f8f8;
   opacity: 0.85;
+}
+
+/* 🌱 Mobile: Tarjetas verticales */
+@media (max-width: 768px) {
+
+  .productos-list,
+  .productos-list thead,
+  .productos-list tbody,
+  .productos-list th,
+  .productos-list td,
+  .productos-list tr {
+    display: block;
+    width: 98%;
+  }
+
+  .productos-list thead {
+    display: none;
+  }
+
+  .productos-list tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 10px;
+  }
+
+  .productos-list td {
+    text-align: left;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .productos-list td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+    color: #333;
+  }
+
+  .productos-list td:last-child {
+    border-bottom: none;
+  }
+
+  .productos-actions {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .productos-actions button {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .stock-bajo {
+    background: #fff0f0;
+    padding: 4px 6px;
+    display: inline-block;
+    border-radius: 4px;
+  }
+}
+
+/* 🌿 Modal de imagen */
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: zoom-out;
+}
+
+.image-modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.image-modal-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.image-modal-content .close-button {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 2rem;
+  color: #fff;
+  cursor: pointer;
 }

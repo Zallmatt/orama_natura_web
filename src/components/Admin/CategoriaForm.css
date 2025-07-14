@@ -1,112 +1,63 @@
-/* Contenedor general */
-.titulo-accion {
-  text-align: center;
-  font-size: 24px;
-  color: #3c2b1e;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-.producto-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  background: #fff;
+/* Contenedor general del formulario */
+.categoria-form {
+  max-width: 500px;
+  margin: 0 auto;
+  background: #ffffff;
   border: 1px solid #ddd;
   padding: 20px;
   border-radius: 8px;
-  max-width: 900px;
-  margin: 0 auto;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* Cada bloque */
-.producto-form fieldset {
-  flex: 1 1 400px;
-  min-width: 300px;
-  border: 1px solid #e0d6ce;
-  border-radius: 6px;
-  background-color: #fdf7f3;
-  padding: 15px;
-  box-sizing: border-box;
-}
-
-/* Títulos */
-.producto-form legend {
-  font-weight: bold;
+/* Título */
+.categoria-form h2 {
+  font-size: 1.6rem;
   color: #3c2b1e;
-  padding: 0 6px;
-  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-/* Etiquetas */
-.producto-form label {
-  display: block;
-  margin-bottom: 10px;
+/* Etiquetas e inputs */
+.categoria-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
   font-size: 14px;
-  color: #444;
+  color: #333;
 }
 
-/* Inputs y selects */
-.producto-form input[type="text"],
-.producto-form input[type="number"],
-.producto-form textarea,
-.producto-form select {
-  width: 100%;
+/* Inputs */
+.categoria-form input[type="text"],
+.categoria-form input[type="number"],
+.categoria-form input[type="color"] {
   padding: 8px 10px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 4px;
+  margin-top: 5px;
   transition: border-color 0.3s;
 }
 
-.producto-form input:focus,
-.producto-form textarea:focus,
-.producto-form select:focus {
+/* Input de color: tamaño fijo */
+.categoria-form input[type="color"] {
+  width: 60px;
+  height: 40px;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Focus */
+.categoria-form input:focus {
   border-color: #a97c50;
   outline: none;
 }
 
-.producto-form textarea {
-  resize: vertical;
-  min-height: 60px;
-}
-
-/* Checkbox */
-.producto-form .checkbox {
-  display: flex;
-  align-items: center;
-  margin-top: 12px;
-}
-
-.producto-form .checkbox input {
-  margin-right: 6px;
-}
-
-/* Imagen preview */
-.producto-form .imagen-preview img {
-  max-width: 200px;
-  height: auto;
-  display: block;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-/* Precio final destacado */
-.producto-form .precio-final {
-  font-weight: bold;
-  color: #3c2b1e;
-  margin: 15px 0;
-}
-
 /* Botones */
 .form-actions {
-  margin-top: 20px;
   display: flex;
+  justify-content: center;
   gap: 10px;
-  width: 100%;
+  margin-top: 20px;
 }
 
 .form-actions button {
@@ -115,9 +66,11 @@
   border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
+  font-size: 0.95rem;
   transition: background 0.3s;
 }
 
+/* Botón principal */
 .form-actions button[type="submit"] {
   background-color: #a97c50;
   color: #fff;
@@ -127,6 +80,7 @@
   background-color: #8c643f;
 }
 
+/* Botón cancelar */
 .form-actions .cancel-btn {
   background-color: #ddd;
   color: #333;
@@ -136,9 +90,17 @@
   background-color: #bbb;
 }
 
-/* Responsive: columna en pantallas pequeñas */
-@media (max-width: 700px) {
-  .producto-form {
+/* Responsive: columna en mobile */
+@media (max-width: 600px) {
+  .categoria-form {
+    padding: 15px;
+  }
+
+  .form-actions {
     flex-direction: column;
+  }
+
+  .form-actions button {
+    width: 100%;
   }
 }

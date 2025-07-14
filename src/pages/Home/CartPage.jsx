@@ -51,15 +51,15 @@ const CartPage = () => {
         minimumFractionDigits: 2
       });
 
-      message += `✅ *${item.name}*\n`;
+      message += `*${item.name}*\n`;
 
       if (item.fragrance) {
-        message += `🔹 Fragancia: ${item.fragrance}\n`;
+        message += `Fragancia: ${item.fragrance}\n`;
       }
 
-      message += `🔸 Cantidad: ${item.quantity}\n`;
-      message += `💵 Precio unitario: ${formattedUnitPrice}\n`;
-      message += `💰 Subtotal: ${formattedSubtotal}\n\n`;
+      message += `Cantidad: ${item.quantity}\n`;
+      message += `Precio unitario: ${formattedUnitPrice}\n`;
+      message += `Subtotal: ${formattedSubtotal}\n\n`;
     });
 
     const totalFormatted = Number(calculateTotal()).toLocaleString("es-AR", {
@@ -68,15 +68,14 @@ const CartPage = () => {
       minimumFractionDigits: 2
     });
 
-    message += `*Total del pedido:* ${totalFormatted}\n`;
-    message += `*Entrega:* ${deliveryOption === "envio" ? "Envío a domicilio" : "Retiro en local"}\n\n`;
-    message += `*Comprador:* ${contact.name}\n`;
-    message += `*Teléfono:* ${contact.phone}\n`;
+    message += `Total del pedido: ${totalFormatted}\n`;
+    message += `Entrega: ${deliveryOption === "envio" ? "Envío a domicilio" : "Retiro en local"}\n\n`;
+    message += `Comprador: ${contact.name}\n`;
+    message += `Teléfono: ${contact.phone}\n`;
 
     const whatsappURL = `https://wa.me/5493794832031?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, "_blank");
   };
-
 
   const handleCheckout = async () => {
     if (!contactData.name || !contactData.phone) {
@@ -118,10 +117,28 @@ const CartPage = () => {
         <>
           <ul className="cart-list">
             {cart.map((item) => {
-              const unitPrice = Number(item.price) - Number(item.price) * (Number(item.discount) / 100);
-              const subtotal = unitPrice * Number(item.quantity);
+              const price = Number(item.price) || 0;
+              const discount = Number(item.discount) || 0;
+              const quantity = Number(item.quantity) || 0;
 
-              const formattedUnitPrice = unitPrice.toLocaleString("es-AR", {
+              const unitPriceOriginal = price;
+              const unitPriceDiscounted = price - price * (discount / 100);
+              const savingPerUnit = unitPriceOriginal - unitPriceDiscounted;
+              const subtotal = unitPriceDiscounted * quantity;
+
+              const formattedOriginal = unitPriceOriginal.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 2
+              });
+
+              const formattedDiscounted = unitPriceDiscounted.toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 2
+              });
+
+              const formattedSaving = savingPerUnit.toLocaleString("es-AR", {
                 style: "currency",
                 currency: "ARS",
                 minimumFractionDigits: 2
@@ -149,8 +166,18 @@ const CartPage = () => {
                         {item.fragrance && (
                           <p className="cart-fragrance">Fragancia: {item.fragrance}</p>
                         )}
+                        <p className="cart-price-original">
+                          Precio original:{" "}
+                          <span className="strikethrough">{formattedOriginal}</span>
+                        </p>
+                        <p className="cart-discount">
+                          Descuento: {Math.round(discount)}%
+                        </p>
+                        <p className="cart-saving">
+                          Te ahorrás: {formattedSaving} por unidad
+                        </p>
                         <p className="cart-price">
-                          Precio unitario: {formattedUnitPrice}
+                          Precio con descuento: {formattedDiscounted}
                         </p>
                         <p className="cart-subtotal">
                           Subtotal: {formattedSubtotal}
@@ -165,9 +192,9 @@ const CartPage = () => {
                       >
                         -
                       </button>
-                      <span>{Number(item.quantity) || 0}</span>
+                      <span>{quantity}</span>
                       <button
-                        disabled={item.quantity >= item.stock}
+                        disabled={quantity >= item.stock}
                         onClick={() =>
                           addToCart({
                             ...item,
@@ -203,6 +230,24 @@ const CartPage = () => {
               Vaciar carrito
             </button>
           </div>
+
+          {/* Total ahorro */}
+          <p className="total-saving">
+            En tu compra total te ahorrás{" "}
+            {cart
+              .reduce((acc, item) => {
+                const price = Number(item.price) || 0;
+                const discount = Number(item.discount) || 0;
+                const quantity = Number(item.quantity) || 0;
+                const savingPerUnit = price * (discount / 100);
+                return acc + savingPerUnit * quantity;
+              }, 0)
+              .toLocaleString("es-AR", {
+                style: "currency",
+                currency: "ARS",
+                minimumFractionDigits: 2
+              })}
+          </p>
 
           {/* Opciones de entrega arriba del formulario */}
           <div className="delivery-options">

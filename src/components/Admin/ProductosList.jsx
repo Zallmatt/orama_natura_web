@@ -1,6 +1,6 @@
 // src/components/Admin/ProductosList.jsx
-import React from "react";
 import "./ProductosList.css";
+import React, { useState } from "react";
 
 const ProductosList = ({
   productos,
@@ -9,6 +9,8 @@ const ProductosList = ({
   onActivate,
   showInactive,
 }) => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
   return (
     <table className="productos-list">
       <thead>
@@ -33,45 +35,46 @@ const ProductosList = ({
             key={prod.id}
             className={!prod.is_active ? "producto-inactivo" : ""}
           >
-            <td>
+            <td data-label="Imagen">
               {prod.image_url ? (
                 <img
                   src={prod.image_url}
                   alt={prod.name}
+                  onClick={() => setSelectedImage(prod.image_url)}
                   style={{
                     width: "50px",
                     height: "50px",
                     objectFit: "cover",
                     display: "block",
                     margin: "0 auto",
-                    borderRadius: "4px"
+                    borderRadius: "4px",
+                    cursor: "pointer",
+                    transition: "transform 0.2s"
                   }}
                 />
               ) : (
                 "Sin imagen"
               )}
             </td>
-            <td>{prod.name}</td>
-            <td>
-              {prod.fragrances
-                ? prod.fragrances.name
-                : "Sin fragancia"}
+            <td data-label="Nombre">{prod.name}</td>
+            <td data-label="Fragancia">
+              {prod.fragrances ? prod.fragrances.name : "Sin fragancia"}
             </td>
-            <td>{prod.description}</td>
-            <td>${prod.price}</td>
-            <td>{prod.discount}%</td>
-            <td>${(prod.price * (1 - prod.discount / 100)).toFixed(2)}</td>
-            <td className={prod.stock < 5 ? "stock-bajo" : ""}>{prod.stock}</td>
-            <td>{prod.categories?.name}</td>
-            <td>{prod.promotions?.title || "Sin promoción"}</td>
-            <td>
+            <td data-label="Descripción">{prod.description}</td>
+            <td data-label="Precio">${prod.price}</td>
+            <td data-label="Descuento">{prod.discount}%</td>
+            <td data-label="Precio Final">${(prod.price * (1 - prod.discount / 100)).toFixed(2)}</td>
+            <td data-label="Stock" className={prod.stock < 5 ? "stock-bajo" : ""}>{prod.stock}</td>
+            <td data-label="Categoría">{prod.categories?.name}</td>
+            <td data-label="Promoción">{prod.promotions?.title || "Sin promoción"}</td>
+            <td data-label="Lanzamiento">
               {prod.is_launch ? (
                 <span style={{ color: "#4caf50", fontSize: "18px" }}>✔️</span>
               ) : (
                 <span style={{ color: "#d32f2f", fontSize: "18px" }}>✖️</span>
               )}
             </td>
-            <td>
+            <td data-label="Acciones">
               <div className="productos-actions">
                 {showInactive ? (
                   <button
@@ -98,7 +101,16 @@ const ProductosList = ({
           </tr>
         ))}
       </tbody>
+      {selectedImage && (
+        <div className="image-modal" onClick={() => setSelectedImage(null)}>
+          <div className="image-modal-content">
+            <img src={selectedImage} alt="Producto" />
+            <span className="close-button">&times;</span>
+          </div>
+        </div>
+      )}
     </table>
+
   );
 };
 

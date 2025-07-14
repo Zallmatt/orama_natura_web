@@ -39,23 +39,23 @@ const OrdersList = ({ orders }) => {
           return (
             <React.Fragment key={order.id}>
               <tr>
-                <td>{order.id}</td>
-                <td>{cliente}</td>
-                <td>{totalItems} productos</td>
-                <td>
+                <td data-label="ID">{order.id}</td>
+                <td data-label="Cliente">{cliente}</td>
+                <td data-label="Productos">{totalItems} productos</td>
+                <td data-label="Fecha">
                   {order.created_at
                     ? new Date(order.created_at).toLocaleDateString("es-AR")
                     : "-"}
                 </td>
-                <td>${Number(order.total_amount || 0).toFixed(2)}</td>
-                <td>
+                <td data-label="Total">${Number(order.total_amount || 0).toFixed(2)}</td>
+                <td data-label="Estado">
                   <span
                     className={`status-badge status-${order.status || "pending"}`}
                   >
                     {order.status}
                   </span>
                 </td>
-                <td>
+                <td data-label="Acciones">
                   <button
                     className="btn-detail"
                     onClick={() => toggleDetail(order.id)}

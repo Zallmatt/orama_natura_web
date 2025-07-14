@@ -1,18 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./Sidebar.css"; // si deseas estilos separados
+import "./Sidebar.css";
 
-const Sidebar = () => (
-  <aside className="admin-sidebar">
+const Sidebar = ({ open, onClose }) => (
+  <aside className={`admin-sidebar ${open ? "open" : ""}`}>
     <nav>
       <ul>
-        <li><NavLink to="/admin">Inicio</NavLink></li>
-        <li><NavLink to="/admin/productos">Productos</NavLink></li>
-        <li><NavLink to="/admin/categorias">Categorías</NavLink></li>
-        <li><NavLink to="/admin/fragancias">Fragancias</NavLink></li>
-        <li><NavLink to="/admin/promociones">Promociones</NavLink></li>
-        <li><NavLink to="/admin/estadisticas">Estadísticas</NavLink></li>
-        <li><NavLink to="/admin/ordenes">Órdenes</NavLink></li>
+        <li><NavLink to="/admin" onClick={onClose}>Inicio</NavLink></li>
+        <li><NavLink to="/admin/productos" onClick={onClose}>Productos</NavLink></li>
+        <li><NavLink to="/admin/categorias" onClick={onClose}>Categorías</NavLink></li>
+        <li><NavLink to="/admin/fragancias" onClick={onClose}>Fragancias</NavLink></li>
+        <li><NavLink to="/admin/promociones" onClick={onClose}>Promociones</NavLink></li>
+        <li><NavLink to="/admin/ordenes" onClick={onClose}>Órdenes</NavLink></li>
+        <li><NavLink to="/admin/estadisticas" onClick={onClose}>Estadísticas</NavLink></li>
       </ul>
     </nav>
   </aside>

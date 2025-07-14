@@ -214,3 +214,28 @@ button:disabled {
   font-size: 1rem;
   color: #3c2b1e;
 }
+
+.strikethrough {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.cart-price-original,
+.cart-discount,
+.cart-saving {
+  font-size: 0.9rem;
+  margin: 2px 0;
+}
+
+.cart-saving {
+  color: #3c2b1e;
+  font-weight: 600;
+}
+
+.total-saving {
+  text-align: right;
+  font-size: 0.95rem;
+  color: #444;
+  margin-top: -12px;
+  margin-bottom: 20px;
+}

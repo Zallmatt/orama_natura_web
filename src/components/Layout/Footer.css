@@ -29,7 +29,7 @@
   justify-content: center;
   flex-wrap: wrap;
   flex: 1; /* Ocupar el espacio restante */
-  margin-left: -180px;
+  margin-left: -200px;
 }
 
 .social-icons a {

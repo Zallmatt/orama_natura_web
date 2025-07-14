@@ -32,6 +32,14 @@ const Footer = () => (
           <img src="/icons/facebook.png" alt="Facebook" className="social-icon" />
           <span>Facebook</span>
         </a>
+        <a
+          href="https://wa.me/543794832031"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <img src="/icons/whatsapp.png" alt="WhatsApp" className="social-icon" />
+          <span>WhatsApp</span>
+        </a>
       </div>
     </div>
     <p className="footer-copy">
