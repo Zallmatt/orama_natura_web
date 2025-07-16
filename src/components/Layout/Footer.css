@@ -11,7 +11,8 @@
   gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  justify-content: space-between; /* Separar logo y redes */
+  justify-content: space-between;
+  /* Separar logo y redes */
 }
 
 .footer-logo {
@@ -25,10 +26,12 @@
 
 .social-icons {
   display: flex;
-  gap: 50px; /* Más espacio entre iconos */
+  gap: 50px;
+  /* Más espacio entre iconos */
   justify-content: center;
   flex-wrap: wrap;
-  flex: 1; /* Ocupar el espacio restante */
+  flex: 1;
+  /* Ocupar el espacio restante */
   margin-left: -200px;
 }
 
@@ -48,7 +51,8 @@
 }
 
 .social-icon {
-  width: 60px; /* Antes 60px */
+  width: 60px;
+  /* Antes 60px */
   height: 60px;
   margin-bottom: 10px;
   filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
@@ -69,8 +73,41 @@
     align-items: center;
     gap: 15px;
   }
+
   .social-icons {
+    display: flex;
+    flex-wrap: nowrap;
+    /* ❗ NO permitir varias filas */
     justify-content: center;
+    gap: 15px;
+    /* Espaciado entre íconos */
+    flex-direction: row;
+    /* Asegura fila */
     margin-left: 0;
+    flex: 1;
+    /* Ocupar todo el ancho disponible */
+    flex-shrink: 0;
+  }
+
+  .social-icons a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .social-icon {
+    font-size: 14px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer-logo img {
+    width: 130px;
+  }
+
+  .footer-copy {
+    font-size: 12px;
+    text-align: center;
   }
 }
