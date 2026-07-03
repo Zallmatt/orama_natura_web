@@ -19,15 +19,15 @@ export const getOrdersByUser = async (userId) => {
   return data;
 };
 
-// Traer resumen general de órdenes
-export const getOrdersSummary = async () => {
+// Traer resumen de orden por ID
+export const getOrderSummaryById = async (id) => {
   const { data } = await api.get(`/orders/${id}/resumen`);
   return data;
 };
 
 // Traer resumen de órdenes por usuario
 export const getOrdersSummaryByUser = async (userId) => {
-  const { data } = await api.get(`/orders/user/${userId}`);
+  const { data } = await api.get(`/orders/user/${userId}/resumen`);
   return data;
 };
 

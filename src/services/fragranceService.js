@@ -19,3 +19,8 @@ export const deleteFragrance = async (id) => {
   const { data } = await api.delete(`/fragrances/${id}`);
   return data;
 };
+
+export const getFragrancesByCategory = async (categoryId) => {
+  const { data } = await api.get(`/fragrances/filter/${categoryId}`);
+  return data;
+};

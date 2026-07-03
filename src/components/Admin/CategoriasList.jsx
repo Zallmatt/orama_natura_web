@@ -1,4 +1,5 @@
 import React from "react";
+import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import "./CategoriasList.css";
 
 const CategoriasList = ({ categorias, onEdit, onDelete }) => (
@@ -11,9 +12,11 @@ const CategoriasList = ({ categorias, onEdit, onDelete }) => (
           <p>Orden: {cat.order_index}</p>
         </div>
         <div className="categoria-actions">
-          <button onClick={() => onEdit(cat)}>Editar</button>
-          <button className="delete-btn" onClick={() => onDelete(cat.id)}>
-            Eliminar
+          <button onClick={() => onEdit(cat)} title="Editar" style={{ padding: '8px 12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <FaPencilAlt />
+          </button>
+          <button className="delete-btn" onClick={() => onDelete(cat.id)} title="Eliminar" style={{ padding: '8px 12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <FaTrashAlt />
           </button>
         </div>
       </div>

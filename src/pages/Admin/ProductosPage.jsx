@@ -22,6 +22,14 @@ const ProductosPage = () => {
   const [showInactive, setShowInactive] = useState(false);
   const [fragrances, setFragrances] = useState([]);
   const [promotions, setPromotions] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [filterCategory, setFilterCategory] = useState("");
+
+  const filteredProductos = productos.filter((prod) => {
+    const matchesSearch = prod.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = filterCategory ? String(prod.category_id) === String(filterCategory) : true;
+    return matchesSearch && matchesCategory;
+  });
 
   useEffect(() => {
     fetchData();
@@ -158,6 +166,29 @@ const ProductosPage = () => {
                 <button onClick={() => setShowInactive(!showInactive)}>
                   {showInactive ? "Ver Activos" : "Ver Inactivos"}
                 </button>
+                
+                <div className="filtros-rapidos" style={{ display: "flex", gap: "10px", alignItems: "center" }}>
+                  <input
+                    type="text"
+                    placeholder="Buscar por nombre..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    style={{ padding: "8px", borderRadius: "4px", border: "1px solid #ccc", minWidth: "200px" }}
+                  />
+                  <select
+                    value={filterCategory}
+                    onChange={(e) => setFilterCategory(e.target.value)}
+                    style={{ padding: "8px", borderRadius: "4px", border: "1px solid #ccc" }}
+                  >
+                    <option value="">Todas las categorías</option>
+                    {categories.map((cat) => (
+                      <option key={cat.id} value={cat.id}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
                 {!showInactive && (
                   <button className="crear-producto" onClick={handleCreate}>
                     + Crear Producto
@@ -165,7 +196,7 @@ const ProductosPage = () => {
                 )}
               </div>
               <ProductosList
-                productos={productos}
+                productos={filteredProductos}
                 onEdit={handleEdit}
                 onDelete={handleDelete}
                 onActivate={handleActivate}

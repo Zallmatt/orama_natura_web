@@ -14,6 +14,36 @@
   background: #eee;
 }
 
+/* Badges */
+.badge {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.category-badge {
+  background-color: #e0e0e0;
+  color: #333;
+}
+.category-badge-maquillaje {
+  background-color: #e6e6fa; /* Lila suave */
+  color: #4b0082;
+}
+.category-badge-cremas,
+.category-badge-crema,
+.category-badge-cuidado-de-la-piel {
+  background-color: #e0f2f1; /* Verde agua */
+  color: #004d40;
+}
+.category-badge-perfumes,
+.category-badge-perfumería {
+  background-color: #ffe082;
+  color: #ff8f00;
+}
+
 .edit-btn {
   background: #1976d2;
   color: white;

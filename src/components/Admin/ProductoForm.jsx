@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ProductoForm.css";
+import { getFragrancesByCategory } from "../../services/fragranceService";
 
 const ProductoForm = ({ initialData, onSave, onCancel, categories, fragrances = [], promotions = [] }) => {
   const [form, setForm] = useState({
@@ -14,6 +15,28 @@ const ProductoForm = ({ initialData, onSave, onCancel, categories, fragrances = 
     promotion_id: "",
     is_launch: false,
   });
+
+  const [filteredFragrances, setFilteredFragrances] = useState(fragrances);
+
+  useEffect(() => {
+    const fetchFragrances = async () => {
+      // Si no hay categoría, o si es la categoría inicial del producto y ya tenemos fragrances como prop
+      if (!form.category_id) {
+        setFilteredFragrances(fragrances);
+        return;
+      }
+
+      try {
+        const data = await getFragrancesByCategory(form.category_id);
+        setFilteredFragrances(data);
+      } catch (err) {
+        console.error("Error fetching fragrances for category:", err);
+        setFilteredFragrances([]);
+      }
+    };
+
+    fetchFragrances();
+  }, [form.category_id, fragrances]);
 
   useEffect(() => {
     if (initialData) {
@@ -95,7 +118,7 @@ const ProductoForm = ({ initialData, onSave, onCancel, categories, fragrances = 
               onChange={handleChange}
             >
               <option value="">Sin fragancia</option>
-              {fragrances.map((f) => (
+              {filteredFragrances.map((f) => (
                 <option key={f.id} value={f.id}>
                   {f.name}
                 </option>

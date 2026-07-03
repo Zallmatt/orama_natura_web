@@ -13,6 +13,36 @@ const OrdersList = ({ orders }) => {
     setExpandedOrderId(expandedOrderId === id ? null : id);
   };
 
+  const getStatusClass = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'pagado':
+      case 'paid':
+        return 'status-paid';
+      case 'cancelado':
+      case 'cancelled':
+        return 'status-cancelled';
+      case 'pendiente':
+      case 'pending':
+      default:
+        return 'status-pending';
+    }
+  };
+
+  const getStatusText = (status) => {
+    switch (status?.toLowerCase()) {
+      case 'pagado':
+      case 'paid':
+        return 'Pagado';
+      case 'cancelado':
+      case 'cancelled':
+        return 'Cancelado';
+      case 'pendiente':
+      case 'pending':
+      default:
+        return 'Pendiente';
+    }
+  };
+
   return (
     <table className="orders-table">
       <thead>
@@ -47,12 +77,17 @@ const OrdersList = ({ orders }) => {
                     ? new Date(order.created_at).toLocaleDateString("es-AR")
                     : "-"}
                 </td>
-                <td data-label="Total">${Number(order.total_amount || 0).toFixed(2)}</td>
+                <td data-label="Total">
+                  {Number(order.total_amount || 0).toLocaleString("es-AR", {
+                    style: "currency",
+                    currency: "ARS",
+                  })}
+                </td>
                 <td data-label="Estado">
                   <span
-                    className={`status-badge status-${order.status || "pending"}`}
+                    className={`status-badge ${getStatusClass(order.status)}`}
                   >
-                    {order.status}
+                    {getStatusText(order.status)}
                   </span>
                 </td>
                 <td data-label="Acciones">
